@@ -1,4 +1,9 @@
 # Projeto flightdashboard
+
+Este projeto tem como objetivo a criação de um sistema integrado de controle de voos para um aeroporto. Tem como principais features o CRUD, que permite o cadastro, leitura, deleção e atualização de voos no sistema e a geração de relatório de voos. 
+
+A linguagem de promação usada é o Python, com a framework Django.
+
 ## Nome do Grupo: BCJ
 
 **Integrantes:** 
@@ -27,7 +32,7 @@ Johan Su Kwok - NUSP: 10770176
     C:\...\MinhaPastaLocal>python -m venv env
     ```
 
-3. Depois, e ative o ambiente usando o comando:
+3. Depois, e ative o ambiente usando o comando no Powershell do Windows:
 
     ```
     C:\...\MinhaPastaLocal>.\env\bin\Activate.ps1
@@ -36,16 +41,18 @@ Johan Su Kwok - NUSP: 10770176
 4. Instale os requerimentos do projeto:
 
     ```
-    C:\...\MinhaPastaLocal>pip install -r requirements.txt
+    C:\...\MinhaPastaLocal> cd flightdashboard
+    C:\...\MinhaPastaLocal\flightdashboard>pip install -r requirements.txt
     ```
 
-4. Para rodar o projeto, use o comando:
+5. Para rodar o projeto, use os comandos:
 
     ```
-    C:\...\MinhaPastaLocal>python manage.py runserver
+    C:\...\MinhaPastaLocal\flightdashboard> cd flightdashboard
+    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard>python manage.py runserver
     ```
 
 
-5. Finalmente, para acessar o teste da aplicação, acessamos o link:
+6. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
 
     http://localhost:8000/voos
