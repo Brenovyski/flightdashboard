@@ -1,10 +1,12 @@
-# Projetoflightdashboard
+# Projeto flightdashboard
 ## Nome do Grupo: BCJ
 
-Integrantes: 
+**Integrantes:** 
 
 Breno Suguru Costa Tominaga - NUSP: 11804320
-Caio Amaral Gurgel Xavier - NUSP? 11804293
+
+Caio Amaral Gurgel Xavier - NUSP: 11804293
+
 Johan Su Kwok - NUSP: 10770176
 
 ## Pré-requisitos:
