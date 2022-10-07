@@ -52,7 +52,6 @@ Johan Su Kwok - NUSP: 10770176
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard>python manage.py runserver
     ```
 
-
 6. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
 
     http://localhost:8000/voos
