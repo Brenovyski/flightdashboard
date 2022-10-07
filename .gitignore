@@ -2,3 +2,5 @@
 
 /env/
 /flightdashboard/db.sqlite3
+/flightdashboard/sys_voos/migrations/
+/flightdashboard/flightdashboard/__pycache__

@@ -45,20 +45,28 @@ Johan Su Kwok - NUSP: 10770176
     C:\...\MinhaPastaLocal\flightdashboard>pip install -r requirements.txt
     ```
 
-5. Para rodar o projeto, use os comandos:
+5. Faça as migrações do Django:
 
     ```
     C:\...\MinhaPastaLocal\flightdashboard> cd flightdashboard
+    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations
+    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py migrate
+    ```
+
+5. Para rodar o projeto, use os comandos:
+
+    ```
+    
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard>python manage.py runserver
     ```
 
+
 6. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
 
-    http://localhost:8000/voos
+    http://localhost:8000/sys_voos
 
 
 Diagrama de Entidade e Relacionamento:
-
 
 
 ![This is an image](https://i.imgur.com/kcgnGWB.png)
