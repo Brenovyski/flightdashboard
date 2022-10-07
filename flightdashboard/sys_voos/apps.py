@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class VoosConfig(AppConfig):
+class SysVoosConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.voos'
+    name = 'sys_voos'

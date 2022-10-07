@@ -55,3 +55,11 @@ Johan Su Kwok - NUSP: 10770176
 6. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
 
     http://localhost:8000/voos
+
+
+Diagrama de Entidade e Relacionamento:
+
+
+
+![This is an image](https://i.imgur.com/kcgnGWB.png)
+
