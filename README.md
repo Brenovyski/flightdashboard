@@ -37,6 +37,11 @@ Johan Su Kwok - NUSP: 10770176
     ```
     C:\...\MinhaPastaLocal>.\env\bin\Activate.ps1
     ```
+    (se não funcionar, tente trocar a pasta bin por Scripts:)
+    ```
+    C:\...\MinhaPastaLocal>.\env\Scripts\Activate.ps1
+    ```
+
 
 4. Instale os requerimentos do projeto:
 
@@ -49,14 +54,13 @@ Johan Su Kwok - NUSP: 10770176
 
     ```
     C:\...\MinhaPastaLocal\flightdashboard> cd flightdashboard
-    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations
+    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations sys_voos
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py migrate
     ```
 
 5. Para rodar o projeto, use os comandos:
 
     ```
-    
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard>python manage.py runserver
     ```
 
