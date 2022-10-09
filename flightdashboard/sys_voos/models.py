@@ -29,9 +29,9 @@ class Partida(models.Model) :
     ]
     id = models.IntegerField(primary_key=True)
     voo = models.ForeignKey(Voo, on_delete=models.CASCADE)
-    horario = models.TimeField(auto_now=False, auto_now_add=False)
+    horario_real = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     status = models.CharField(max_length=2, choices=departure_status_choices, default='EM')
-    data = models.DateTimeField(auto_now=False, auto_now_add=False)
+    data = models.DateTimeField(auto_now=False, auto_now_add=False, null=False)
 
     class Meta:
         db_table = 'partida'
@@ -44,9 +44,9 @@ class Chegada(models.Model) :
 
     id = models.IntegerField(primary_key=True)
     voo = models.ForeignKey(Voo, on_delete=models.CASCADE)
-    horario = models.TimeField(auto_now=False, auto_now_add=False)
+    horario_real = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     status = models.CharField(max_length=2, choices=arrive_status_choices, default='VO')
-    data = models.DateTimeField(auto_now=False, auto_now_add=False)
+    data = models.DateTimeField(auto_now=False, auto_now_add=False, null=False)
 
     class Meta:
         db_table = 'chegada'
