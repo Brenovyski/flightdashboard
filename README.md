@@ -4,6 +4,10 @@ Este projeto tem como objetivo a criação de um sistema integrado de controle d
 
 A linguagem de promação usada é o Python, com a framework Django.
 
+**Diagrama de Entidade e Relacionamento:**
+
+![This is an image](https://i.imgur.com/kcgnGWB.png)
+
 ## Nome do Grupo: BCJ
 
 **Integrantes:** 
@@ -54,24 +58,25 @@ Johan Su Kwok - NUSP: 10770176
 
     ```
     C:\...\MinhaPastaLocal\flightdashboard> cd flightdashboard
+    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations sys_voos
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py migrate
     ```
-
-5. Para rodar o projeto, use os comandos:
+6. Execute os testes:
+    ```
+    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py test
+    ```
+7. Para rodar o projeto, use os comandos:
 
     ```
     C:\...\MinhaPastaLocal\flightdashboard\flightdashboard>python manage.py runserver
     ```
 
 
-6. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
+8. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
 
     http://localhost:8000/sys_voos
 
 
-Diagrama de Entidade e Relacionamento:
 
-
-![This is an image](https://i.imgur.com/kcgnGWB.png)
 
