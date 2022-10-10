@@ -41,7 +41,7 @@ Johan Su Kwok - NUSP: 10770176
     ```
     C:\...\MinhaPastaLocal>.\env\bin\Activate.ps1
     ```
-    (se não funcionar, tente trocar a pasta bin por Scripts:)
+    se não funcionar, tente trocar a pasta `bin` por `Scripts`:
     ```
     C:\...\MinhaPastaLocal>.\env\Scripts\Activate.ps1
     ```
