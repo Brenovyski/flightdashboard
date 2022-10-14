@@ -136,36 +136,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
-
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Páginas
-                <i class="right fas fa-angle-left"></i>
-              </p>
+          <li class="nav-item">
+            <a href="{% url 'crud' %}" class="nav-link active">
+              <i class="far fa-circle nav-icon"></i>
+              <p>CRUD</p>
             </a>
-            <ul class="nav nav-treeview"> -->
-        
-              <li class="nav-item">
-                <a href="{% url 'crud' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>CRUD</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'gera_relatorio' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Atualizar Status</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'atualiza_status' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gerar Relatorio</p>
-                </a>
-              </li>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'gera_relatorio' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Atualizar Status</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'atualiza_status' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Gerar Relatorio</p>
+            </a>
+          </li>
+        </ul>
+      </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -173,34 +163,94 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
+        <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Página Inicial</h1>
-          </div><!-- /.col -->
+            <div class="col-sm-6">
+            <h1 class="m-0">CRUD</h1>
+            </div><!-- /.col -->
         </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+    <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="m-0">Criar</h5>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Permite a criação de um novo voo ao sistema</h6>
+
+              <p class="card-text"> </p> 
+               <a href="#" class="btn btn-primary">Acessar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Editar</h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Permite a edição de dados de um voo no sistema</h6>
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>  
+      </div> <!-- /.row -->
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="m-0">Ler</h5>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Permite a leitura de detalhes de um voo do sistema</h6>
+              <p class="card-text"> </p>
+              <a href="#" class="btn btn-primary">Acessar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Deletar</h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Permite a exclusão de um voo do sistema</h6>
+                <p class="card-text"> </p> 
+             
+                <a href="#" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div><!-- /.col-md-6 -->
+      </div> <!-- /.row -->
+
+    </div><!-- /.container-fluid -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.content -->
+</div>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
+
+
+  </div> 
+  
+<!-- /.content-wrapper -->
+<!-- ./wrapper -->
+
+<!-- Main Footer -->
+<footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
       Anything you want
@@ -208,8 +258,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
-</div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
