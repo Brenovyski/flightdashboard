@@ -76,7 +76,3 @@ Johan Su Kwok - NUSP: 10770176
 8. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
 
     http://localhost:8000/sys_voos
-
-
-
-
