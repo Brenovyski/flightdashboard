@@ -27,49 +27,49 @@ Johan Su Kwok - NUSP: 10770176
 1. Clone o repositório a alguma pasta local.
 
     ```
-    C:\...\MinhaPastaLocal> git clone https://github.com/Brenovyski/flightdashboard.git
+    C:\...\MinhaPastaLocal> git clone https://github.com/Brenovyski/projeto_PCS3643_FD
     ```
 
 2. É recomendado criar um ambiente virtual usando `venv` utilizando o python (a depender do seu sistema operacional). Para isso, use o comando:
 
     ```
-    C:\...\MinhaPastaLocal>python -m venv env
+    C:\...\MinhaPastaLocal> cd projeto_PCS3643_FD
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD> python -m venv env
     ```
 
 3. Depois, e ative o ambiente usando o comando no Powershell do Windows:
 
     ```
-    C:\...\MinhaPastaLocal>.\env\bin\Activate.ps1
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD> .\env\bin\Activate.ps1
     ```
     se não funcionar, tente trocar a pasta `bin` por `Scripts`:
     ```
-    C:\...\MinhaPastaLocal>.\env\Scripts\Activate.ps1
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD> .\env\Scripts\Activate.ps1
     ```
 
 
 4. Instale os requerimentos do projeto:
 
     ```
-    C:\...\MinhaPastaLocal> cd flightdashboard
-    C:\...\MinhaPastaLocal\flightdashboard>pip install -r requirements.txt
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD> pip install -r requirements.txt
     ```
 
 5. Faça as migrações do Django:
 
     ```
-    C:\...\MinhaPastaLocal\flightdashboard> cd flightdashboard
-    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations
-    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py makemigrations sys_voos
-    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py migrate
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD> cd flightdashboard
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py makemigrations
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py makemigrations sys_voos
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py migrate
     ```
 6. Execute os testes:
     ```
-    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard> python manage.py test
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py test
     ```
 7. Para rodar o projeto, use os comandos:
 
     ```
-    C:\...\MinhaPastaLocal\flightdashboard\flightdashboard>python manage.py runserver
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard>python manage.py runserver
     ```
 
 
