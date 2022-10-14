@@ -6,7 +6,11 @@ A linguagem de promação usada é o Python, com a framework Django.
 
 **Diagrama de Entidade e Relacionamento:**
 
-![This is an image](https://i.imgur.com/kcgnGWB.png)
+![This is an image](https://i.imgur.com/kcgnGWB.png)[
+
+**Diagrama de Navegação no Sistema:**
+
+![This is an image](https://i.imgur.com/UH5zzUy.png)
 
 ## Nome do Grupo: BCJ
 
