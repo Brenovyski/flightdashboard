@@ -67,16 +67,32 @@ Johan Su Kwok - NUSP: 10770176
     C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py migrate
     ```
 6. Execute os testes:
+
     ```
     C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py test
     ```
-7. Para rodar o projeto, use os comandos:
+
+7. Crie os usuários padrão para o uso do sistema (logins pré-definidos):
+
+    ```
+    C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard> python manage.py createsuperuser
+    ```
+
+    Rode esse comando 3 vezes para criar 3 credenciais diferentes conforme o seguinte padrão:
+
+    | Username      | Email address             | Password    |
+    |---------------|---------------------------|-------------|
+    | Administrador | admin@flightdashboard.com | admin       |
+    | Funcionario   | func@flightdashboard.com  | func        |
+    | Gerente       | geren@flightdashboard.com | geren       |
+
+8. Para rodar o projeto, use os comandos:
 
     ```
     C:\...\MinhaPastaLocal\projeto_PCS3643_FD\flightdashboard>python manage.py runserver
     ```
 
 
-8. Finalmente, para realizar o teste da aplicação voo, acessamos o link:
+9. Finalmente, para executar os sistema, acessamos o link:
 
-    http://localhost:8000/sys_voos
+    http://localhost:8000/
