@@ -1,0 +1,58 @@
+{% load static %}
+
+<!-- Brand Logo -->
+  <a href="{% url 'index' %}" class="brand-link">
+    <img src="{% static 'dist/img/icon_logo_s.png' %}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+    <span class="brand-text font-weight-light">Flight Dashboard</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="https://media-exp1.licdn.com/dms/image/C4D03AQENAhuPfYggCQ/profile-displayphoto-shrink_200_200/0/1652147731157?e=2147483647&v=beta&t=4FK2D_8yYnozTKtLC1SctfFWy5hiJY30w4zbyBetdo4" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="https://github.com/Brenovyski" class="d-block">Bruno Sominaga</a>
+      </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">        
+            <li class="nav-item">
+              <a {% if request.resolver_match.view_name == 'crud' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'crud' %}">
+                &nbsp;<i class="fa-solid fa-database fa-xl"></i>
+                &nbsp;&nbsp;<p>CRUD</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a {% if request.resolver_match.view_name == 'atualiza_status' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'atualiza_status' %}">
+                <i class="fa-solid fa-rotate fa-xl"></i>
+                &nbsp;&nbsp;<p>Atualizar Status</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a {% if request.resolver_match.view_name == 'gera_relatorio' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'gera_relatorio' %}">
+                &nbsp;<i class="fa-regular fa-file-lines fa-xl"></i>
+                &nbsp;&nbsp;&nbsp;<p>Gerar Relatório</p>
+              </a>
+            </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->

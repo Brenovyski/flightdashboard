@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{% static 'dist/img/icon_logo.png' %}" type="image/x-icon">
+  <title>Flight Dashboard</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Font Awesome Free Kit Icon  -->
+  <script src="https://kit.fontawesome.com/d2c5d61015.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  {% include 'base/navbar.html' %}
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    {% include 'base/sidebar.html' %}
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  {% block body %}
+  {% endblock body %}
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-light">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Controlador de conteúdo</h5>
+      <div class="info-box">
+        <span {% if request.resolver_match.view_name == 'crud' %} class="info-box-icon bg-danger" {% else %} class="info-box-icon bg-info" {% endif %}><i class="fa-solid fa-database fa-xl"></i></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">CRUD</span>
+            <span class="info-box-number"></span>
+        </div>
+      </div>
+      <div class="info-box">
+        <span {% if request.resolver_match.view_name == 'atualiza_status' %} class="info-box-icon bg-danger" {% else %} class="info-box-icon bg-info" {% endif %}><i class="fa-solid fa-rotate fa-xl"></i></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Status</span>
+            <span class="info-box-number"></span>
+        </div>
+      </div>
+      <div class="info-box">
+        <span {% if request.resolver_match.view_name == 'gera_relatorio' %} class="info-box-icon bg-danger" {% else %} class="info-box-icon bg-info" {% endif %}><i class="fa-regular fa-file-lines fa-xl"></i></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Relatório</span>
+            <span class="info-box-number"></span>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  {% include 'base/footer.html' %}
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>
