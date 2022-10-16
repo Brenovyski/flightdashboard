@@ -1,0 +1,101 @@
+{% load static %}
+
+<!-- OBS: Vão existir três login responsáveis pelas três funções (CRUD, ATUALIZAR, RELATORIO) do sistema
+     - O login de administrador do sistema, responsável pelo CRUD
+     - O login dos funcionários da companhia aéres responsável por atualizar os status de voos
+     - O login de gerente de operações do sistema, responsável pela geração de relatórios -->
+<!-- Esse padrão pode ser alterado conforme mudanças tenham sido feitas -->
+     
+<!-- Os logins deverão ser cadastrados previamente com o seguinte padrão:
+     Administrador do sistema
+        - Username: Administrador
+        - Email address: admin@flightdashboard.com
+        - Password: admin
+     Funcionários da companhia aérea
+        - Username: Funcionario
+        - Email address: func@flightdashboard.com
+        - Password: func
+     Gerente de operações do sistema
+        - Username: Gerente
+        - Email address: geren@flightdashboard.com
+        - Password: geren 
+    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{% static 'dist/img/icon_logo.png' %}" type="image/x-icon">
+  <title>Login | Flight Dashboard</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Font Awesome Free Kit Icon  -->
+  <script src="https://kit.fontawesome.com/d2c5d61015.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <img src="{% static 'dist/img/logo-no-background.png' %}" alt="Imagem" 
+      style="display: block; margin-left: auto; margin-right: auto"
+       width="300" 
+       height="104,4">
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input id="username" name="username" type="username" class="form-control" placeholder="Username" required autofocus>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input id=password name="password" type="password" class="form-control" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </div>
+      </form>
+      <br>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>

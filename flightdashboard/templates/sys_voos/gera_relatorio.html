@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block body %}
+{% if user.username == "Gerente" %}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -15,5 +16,8 @@
     </div>
     <!-- /.content-header -->
 
-  </div> 
+  </div>
+{% else %}
+  {% include 'base/error.html' %}
+{% endif %} 
 {% endblock body %}

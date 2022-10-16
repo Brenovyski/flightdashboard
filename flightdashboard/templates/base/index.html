@@ -1,3 +1,4 @@
+{% if user.is_authenticated %}
 {% load static %}
 <!DOCTYPE html>
 
@@ -82,3 +83,7 @@
 <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 </body>
 </html>
+{% else %}
+  {% include 'registration/login.html' %}
+{% endif %}
+ 

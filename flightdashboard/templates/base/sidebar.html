@@ -10,11 +10,21 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      {% if user.username == "Administrador" %}
       <div class="image">
-        <img src="https://media-exp1.licdn.com/dms/image/C4D03AQENAhuPfYggCQ/profile-displayphoto-shrink_200_200/0/1652147731157?e=2147483647&v=beta&t=4FK2D_8yYnozTKtLC1SctfFWy5hiJY30w4zbyBetdo4" class="img-circle elevation-2" alt="User Image">
+        <img src="{% static 'dist/img/admin.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
+      {% elif user.username == "Funcionario" %}
+      <div class="image">
+        <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      {% elif user.username == "Gerente" %}
+      <div class="image">
+        <img src="{% static 'dist/img/geren.png'%}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      {% endif %}
       <div class="info">
-        <a href="https://github.com/Brenovyski" class="d-block">Bruno Sominaga</a>
+        <a style="pointer-events: none" href="#" class="d-block">{{ user.username }}</a>
       </div>
     </div>
 
