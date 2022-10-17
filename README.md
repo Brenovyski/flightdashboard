@@ -2,7 +2,7 @@
 
 Este projeto tem como objetivo a criação de um sistema integrado de controle de voos para um aeroporto. Tem como principais features o CRUD, que permite o cadastro, leitura, deleção e atualização de voos no sistema e a geração de relatório de voos. 
 
-A linguagem de promação usada é o Python, com a framework Django.
+A linguagem de programação usada é o Python, com a framework Django.
 
 **Diagrama de Entidade e Relacionamento:**
 
@@ -50,7 +50,6 @@ Johan Su Kwok - NUSP: 10770176
     ```
     C:\...\MinhaPastaLocal\projeto_PCS3643_FD> .\env\Scripts\Activate.ps1
     ```
-
 
 4. Instale os requerimentos do projeto:
 
