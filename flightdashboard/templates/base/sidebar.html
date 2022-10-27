@@ -22,6 +22,10 @@
       <div class="image">
         <img src="{% static 'dist/img/geren.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
+      {% elif user.username == "Desenvolvedor" %}
+      <div class="image">
+        <img src="{% static 'dist/img/developer.png'%}" class="img-circle elevation-2" alt="User Image">
+      </div>
       {% endif %}
       <div class="info">
         <a style="pointer-events: none" href="#" class="d-block">{{ user.username }}</a>

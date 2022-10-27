@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-{% if user.username == "Funcionario" %}
+{% if user.username == "Funcionario" or user.username == "Desenvolvedor" %}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">

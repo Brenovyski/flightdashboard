@@ -85,6 +85,13 @@ Johan Su Kwok - NUSP: 10770176
     | Funcionario   | func@flightdashboard.com  | func        |
     | Gerente       | geren@flightdashboard.com | geren       |
 
+   Para fins de desenvolvimento, pode-se também criar um login no molde abaixo:
+
+    | Username      | Email address             | Password    |
+    |---------------|---------------------------|-------------|
+    | Desenvolvedor | dev@flightdashboard.com   | dev         | 
+    
+
 8. Para rodar o projeto, use os comandos:
 
     ```
