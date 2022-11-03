@@ -31,7 +31,12 @@ class VooModelTest(TestCase):
     CompanhiaAerea.objects.create(nome='Gol')
     companhia_1 = CompanhiaAerea.objects.get(nome='Gol')
     horario = datetime.time(10,30) #10 horas e 30 min
-    Voo.objects.create(companhia=companhia_1, horario_previsto=horario, local='Argentina')
+    Voo.objects.create(companhia=companhia_1, horario_previsto=horario, local='Argentina', codigo='GL3249')
+
+  def test_voo_codigo(self):
+    companhia_1 = CompanhiaAerea.objects.get(nome='Gol')
+    voo_1 = Voo.objects.get(companhia=companhia_1)
+    self.assertEqual(voo_1.codigo, 'GL3249')
 
   def test_voo_id(self):
     companhia_1 = CompanhiaAerea.objects.get(nome='Gol')
