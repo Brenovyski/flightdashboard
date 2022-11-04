@@ -1,4 +1,3 @@
-from tkinter import commondialog
 from django.shortcuts import render
 
 from django.http import HttpResponse
