@@ -2,15 +2,18 @@ from tkinter import commondialog
 from django.shortcuts import render
 
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from sys_voos.models import CompanhiaAerea, Voo, Partida, Chegada
 from datetime import datetime
 from django.core.exceptions import ValidationError
+from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
 from django.shortcuts import get_object_or_404
 
+from sys_voos.forms import CodigoForm
+from sys_voos.models import Voo
 from django.core.exceptions import MultipleObjectsReturned
-
 
 def index(request):
     return render(request, 'sys_voos/index.html')
@@ -58,6 +61,7 @@ def criar_voo(request):
                 'local': request.POST['local'],
                 'horario_previsto': horario_stripped,
             }
+
             record = Voo(**voo)
             record.save()
             print(voo)
@@ -71,6 +75,12 @@ def criar_voo(request):
             context = {
                 'obj': False,
                 'error': error, 
+            }
+            return render(request, 'sys_voos/criar_voo.html', context)
+        except:
+            context = {
+                'obj': False,
+                'error': True, 
             }
             return render(request, 'sys_voos/criar_voo.html', context)
     else:
@@ -112,10 +122,24 @@ def editar_voo(request):
         }
     return render(request, 'sys_voos/editar_voo.html', context)
 
+
 def ler_voo(request): 
     return render(request, 'sys_voos/ler_voo.html')
 
-def deletar_voo(request): 
-    return render(request, 'sys_voos/deletar_voo.html')
+
+def deletar_voo(request):
+    if request.method == 'POST':
+        form = CodigoForm(request.POST)
+        if form.is_valid():
+            codigo = form.cleaned_data['codigo']
+            voo = Voo.objects.filter(codigo=codigo)
+            voo.delete()
+            return HttpResponseRedirect('/deletar_voo')
+    else:
+        form = CodigoForm() 
+        return render(request, 'sys_voos/deletar_voo.html', {'form': form})
+
+
+
 
 
