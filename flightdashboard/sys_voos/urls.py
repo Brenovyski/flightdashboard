@@ -10,5 +10,5 @@ urlpatterns = [
     path("criar_voo", views.criar_voo, name="criar_voo"),
     path("editar_voo", views.editar_voo, name="editar_voo"),
     path("ler_voo", views.ler_voo, name="ler_voo"),
-    path("deletar_voo", views.deletar_voo, name="deletar_voo")
+    path("deletar_voo", views.deletar_voo, name="deletar_voo"),
 ]
