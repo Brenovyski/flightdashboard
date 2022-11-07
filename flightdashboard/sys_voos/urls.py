@@ -11,4 +11,7 @@ urlpatterns = [
     path("editar_voo", views.editar_voo, name="editar_voo"),
     path("ler_voo", views.ler_voo, name="ler_voo"),
     path("deletar_voo", views.deletar_voo, name="deletar_voo"),
+    path("relatorio_chegadas", views.relatorio_chegadas, name="relatorio_chegadas"),
+    path("relatorio_partidas", views.relatorio_partidas, name="relatorio_partidas"),
+    path("relatorio_movimentacoes", views.relatorio_movimentacoes, name="relatorio_movimentacoes"),
 ]
