@@ -10,7 +10,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">CRUD</h1>
+            <h1 class="m-0"></h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -22,7 +22,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-6">
-          <div class="card">
+          <div class="card card-success">
             <div class="card-header">
               <h5 class="m-0">Criar</h5>
             </div>
@@ -30,26 +30,26 @@
               <h6 class="card-title">Permite a criação de um novo voo ao sistema</h6>
 
               <p class="card-text"> </p> 
-               <a href="{% url 'criar_voo' %}" class="btn btn-primary">Acessar</a>
+               <a href="{% url 'criar_voo' %}" class="btn btn-success">Acessar</a>
             </div>
           </div>
         </div>
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card card-warning">
               <div class="card-header">
                 <h5 class="m-0">Editar</h5>
               </div>
               <div class="card-body">
                 <h6 class="card-title">Permite a edição de dados de um voo no sistema</h6>
                 <p class="card-text"></p>
-                <a href="{% url 'editar_voo' %}" class="btn btn-primary">Acessar</a>
+                <a href="{% url 'editar_voo' %}" class="btn btn-warning">Acessar</a>
               </div>
             </div>
           </div>  
       </div> <!-- /.row -->
       <div class="row">
         <div class="col-lg-6">
-          <div class="card">
+          <div class="card card-primary">
             <div class="card-header">
               <h5 class="m-0">Ler</h5>
             </div>
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="card">
+          <div class="card card-danger">
               <div class="card-header">
                 <h5 class="m-0">Deletar</h5>
               </div>
@@ -69,7 +69,7 @@
                 <h6 class="card-title">Permite a exclusão de um voo do sistema</h6>
                 <p class="card-text"> </p> 
              
-                <a href="{% url 'deletar_voo' %}" class="btn btn-primary">Acessar</a>
+                <a href="{% url 'deletar_voo' %}" class="btn btn-danger">Acessar</a>
               </div>
             </div>
           </div><!-- /.col-md-6 -->

@@ -1,4 +1,3 @@
-from tkinter import commondialog
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -133,11 +132,14 @@ def deletar_voo(request):
         if form.is_valid():
             codigo = form.cleaned_data['codigo']
             voo = Voo.objects.filter(codigo=codigo)
-            voo.delete()
+            if not voo:
+                messages.error(request, "Código de voo inválido, voo não deletado.")
+            else:
+                voo.delete()
+                messages.success(request, "Voo deletado com sucesso.")
             return HttpResponseRedirect('/deletar_voo')
     else:
-        form = CodigoForm() 
-        return render(request, 'sys_voos/deletar_voo.html', {'form': form})
+        return render(request, 'sys_voos/deletar_voo.html')
 
 
 

@@ -11,8 +11,8 @@ class CompanhiaAerea(models.Model) :
 class Voo(models.Model) :
     id = models.IntegerField(primary_key=True)
     codigo = models.CharField(max_length=6, blank=False, default='AA0000')
-    # companhia = models.ForeignKey(CompanhiaAerea, on_delete=models.CASCADE)
-    companhia = models.CharField(max_length=50, blank=False)
+    companhia = models.ForeignKey(CompanhiaAerea, on_delete=models.CASCADE)
+    #companhia = models.CharField(max_length=50, blank=False)
     horario_previsto = models.TimeField(auto_now=False, auto_now_add=False)
     local = models.CharField(max_length=200, null=False)
     
