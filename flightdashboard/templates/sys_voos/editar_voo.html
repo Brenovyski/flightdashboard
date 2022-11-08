@@ -30,7 +30,7 @@
         <form method="POST" action="{% url 'editar_voo' %}" >
           {% csrf_token %}
           <div class="card-body">
-            <h5>Para manter o campo, digite "-" no campo</h5>
+            <h5>Preencha os campos que deseja alterar. Deixe vazio os campos que não deseja alterar.</h5>
 
             <div class="form-group">
               <label for="codigo">Código de voo</label>

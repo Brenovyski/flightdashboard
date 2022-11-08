@@ -2,8 +2,6 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from sys_voos.models import CompanhiaAerea, Voo, Partida, Chegada
-from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
@@ -13,6 +11,10 @@ from django.shortcuts import get_object_or_404
 from sys_voos.forms import CodigoForm
 from sys_voos.models import Voo
 from django.core.exceptions import MultipleObjectsReturned
+
+from sys_voos.models import CompanhiaAerea, Voo, Partida, Chegada
+from django.utils import timezone
+from datetime import datetime
 
 def index(request):
     return render(request, 'sys_voos/index.html')
@@ -25,14 +27,86 @@ def crud(request):
 def gera_relatorio(request):
     return render(request, 'sys_voos/gera_relatorio.html')
 
+def check_status_order_partida(status_now, status_applied):
+    status_order = {
+        'EM': 1,
+        'CA': 10, #cancelado nao pode mudar de status
+        'PR': 2,
+        'TA': 3,
+        'PO': 4,
+        'AU': 5,
+        'VO': 6,
+        'AT': 10, #atterisado nao existe
+    }
+    
+    if status_order[status_now] + 1 ==  status_order[status_applied]:
+        return status_applied
+    else:
+        return False
 def atualiza_status(request):
+    if request.method == 'POST':
+        try:
+            print(request.POST)
+            voo_instance = get_object_or_404(Voo, codigo=request.POST['codigo'])
+        except Exception as error:
+            messages.error(request, "Código de voo inválido, tente novamente.")
+            return HttpResponseRedirect('/atualiza_status')
+        if request.POST['vootype'] == 'partida':
+            try:
+                partida_instance = get_object_or_404(Partida, voo=voo_instance)
+                if check_status_order_partida(partida_instance.status, request.POST['statusform']):
+                    partida_instance.status = request.POST['statusform']
+                    if request.POST['statusform'] == 'VO':
+                        partida_instance.horario_real = timezone.now()
+                    partida_instance.save()
+                    messages.success(request, "Voo atualizado com sucesso.")
+                else:
+                    messages.error(request, "Status inválido, tente novamente.")
+            except Exception as error:
+                if "No Partida matches the given query." in str(error):
+                    if request.POST['statusform'] == "EM" or request.POST['statusform'] == "CA":
+                        partida = {
+                            'voo': voo_instance,
+                            'status': request.POST['statusform'],
+                            'data': timezone.now(),
+                        }
+                        record = Partida(**partida)
+                        record.save()
+                        messages.success(request, "Voo atualizado com sucesso.")
+                    else:
+                        messages.error(request, "Status inválido, tente novamente.")
+                        return HttpResponseRedirect('/atualiza_status')
+        else:
+            try:
+                chegada_instance = get_object_or_404(Chegada, voo=voo_instance)
+                if request.POST['statusform'] == 'AT':
+                    chegada_instance.status = request.POST['statusform']
+                    chegada_instance.horario_real = timezone.now()
+                    chegada_instance.save()
+                    messages.success(request, "Voo atualizado com sucesso.")
+                else:
+                    messages.error(request, "Status inválido, tente novamente.")
+            except Exception as error:
+                if "No Chegada matches the given query." in str(error):
+                    if request.POST['statusform'] == "VO":
+                        chegada = {
+                            'voo': voo_instance,
+                            'status': request.POST['statusform'],
+                            'data': timezone.now(),
+                        }
+                        record = Chegada(**chegada)
+                        record.save()
+                        messages.success(request, "Voo atualizado com sucesso.")
+                    else:
+                        messages.error(request, "Status inválido, tente novamente.")
+                        return HttpResponseRedirect('/atualiza_status')
     return render(request, 'sys_voos/atualiza_status.html')
 
 def criar_voo(request):    
     if request.method == 'POST':
         try:
             try:
-                get_object_or_404(Voo, codigo=request.POST['codigo'])
+                get_object_or_404(Voo, codigo=request.POST['codigo'])   
                 raise MultipleObjectsReturned
             except MultipleObjectsReturned as error:
                 print(error)
@@ -107,6 +181,9 @@ def editar_voo(request):
                 'error': False,
             }
         except Exception as error:
+            print(error.__class__.__name__)
+            if "No Voo matches the given query." in str(error):
+                error = "Esse código de voo não existe."
             if "No CompanhiaAerea matches the given query." in str(error):
                 error = "Essa companhia aérea não existe."
             context = {
