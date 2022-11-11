@@ -16,6 +16,8 @@ from sys_voos.models import CompanhiaAerea, Voo, Partida, Chegada
 from django.utils import timezone
 from datetime import datetime
 
+from django.views.generic.base import TemplateView
+
 def index(request):
     return render(request, 'sys_voos/index.html')
 
@@ -26,6 +28,16 @@ def crud(request):
 
 def gera_relatorio(request):
     return render(request, 'sys_voos/gera_relatorio.html')
+
+class painel(TemplateView):
+    template_name = "sys_voos/painel.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['partidas'] = Partida.objects.all()
+        context['chegadas'] = Chegada.objects.all()
+        print(context)
+        return context
 
 def check_status_order_partida(status_now, status_applied):
     status_order = {
@@ -200,7 +212,22 @@ def editar_voo(request):
 
 
 def ler_voo(request): 
-    return render(request, 'sys_voos/ler_voo.html')
+    context = {}
+    if request.method == 'POST':
+        try:
+            voo_instance = get_object_or_404(Voo, codigo=request.POST['codigo'])
+            context = {
+                'voo': voo_instance
+            }
+            return render(request, 'sys_voos/ler_voo.html', context)
+        except Exception as error:
+            print(error.__class__.__name__)
+            print(error)
+            if "No Voo matches the given query." in str(error):
+                messages.error(request, "Código de voo inválido, voo não existe.")
+            return render(request, 'sys_voos/ler_voo.html', context)
+    else:
+        return render(request, 'sys_voos/ler_voo.html', context)
 
 
 def deletar_voo(request):

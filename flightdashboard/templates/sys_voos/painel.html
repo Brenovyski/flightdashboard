@@ -1,0 +1,78 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block body %}
+<div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            <h1 class="m-0">Painel de voo</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+  <div class="content">
+    {% if chegadas or partidas %}
+    <div class="card">
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Código</th>
+                <th>Companhia</th>
+                <th>Status</th>
+                <th>Local</th>
+                <th>Horário Previsto</th>
+                <th>Horário Real</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for partida in partidas %}
+              <tr>
+                <td>{{partida.voo.id}}</td>
+                <td>Partida</td>
+                <td>{{partida.voo.codigo}}</td>
+                <td>{{partida.voo.companhia.nome}}</td>
+                <td>{{partida.status}}</td>
+                <td>{{partida.voo.local}}</td>
+                <td>{{partida.voo.horario_previsto}}</td>
+                <td>{{partida.horario_real}}</td>
+              </tr>
+              {% endfor %}
+
+              {% for chegada in chegadas %}
+              <tr>
+                <td>{{chegada.voo.id}}</td>
+                <td>Chegada</td>
+                <td>{{chegada.voo.codigo}}</td>
+                <td>{{chegada.voo.companhia.nome}}</td>
+                <td>{{chegada.status}}</td>
+                <td>{{chegada.voo.local}}</td>
+                <td>{{chegada.voo.horario_previsto}}</td>
+                <td>{{chegada.horario_real}}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+    {% else %}
+        <p><strong>Não há voos para monitorar.</strong></p>
+
+    {% endif %} 
+    
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.content -->
+</div>
+{% endblock body %}
