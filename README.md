@@ -102,3 +102,17 @@ Johan Su Kwok - NUSP: 10770176
 9. Finalmente, para executar os sistema, acessamos o link:
 
     http://localhost:8000/
+
+
+
+## Observações
+
+O sistema comporta as seguintes companhias aéreas pré-determinadas:
+
+| Companhia | Código | 
+|-----------|--------|
+| Azul      | AZ     |
+| Gol       | GO     |
+| Latam     | LA     |
+| Lufthansa | LF     |
+| Emirates  | EM     |

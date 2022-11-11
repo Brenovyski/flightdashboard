@@ -252,6 +252,7 @@ def relatorio_chegadas(request):
 def relatorio_movimentacoes(request): 
     return render(request, 'sys_voos/relatorio_movimentacoes.html')
 
-def relatorio_partidas(request): 
-    return render(request, 'sys_voos/relatorio_partidas.html')
+def relatorio_partidas(request):
+    partidas = Partida.objects.all(); 
+    return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas})
 
