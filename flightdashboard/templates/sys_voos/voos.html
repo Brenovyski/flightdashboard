@@ -8,7 +8,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Painel de voo</h1>
+            <h1 class="m-0">Voos</h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -17,15 +17,12 @@
 
     <!-- Main content -->
   <div class="content">
-    {% if not partidas or not chegadas%}
+    {% if not object_list  %}
     <p><strong>Não há voos para monitorar.</strong></p>
     {% endif %} 
 
-    {% if partidas %}
+    {% if object_list  %}
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Partidas</h3>
-          </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
           <table class="table table-hover text-nowrap">
@@ -34,22 +31,19 @@
                 <th>ID</th>
                 <th>Código</th>
                 <th>Companhia</th>
-                <th>Status</th>
                 <th>Local</th>
+
                 <th>Horário Previsto</th>
-                <th>Horário Real</th>
               </tr>
             </thead>
             <tbody>
-              {% for partida in partidas %}
+              {% for voo in object_list  %}
               <tr>
-                <td>{{partida.voo.id}}</td>
-                <td>{{partida.voo.codigo}}</td>
-                <td>{{partida.voo.companhia.nome}}</td>
-                <td>{{partida.status}}</td>
-                <td>{{partida.voo.local}}</td>
-                <td>{{partida.voo.horario_previsto}}</td>
-                <td>{{partida.horario_real}}</td>
+                <td>{{voo.id}}</td>
+                <td>{{voo.codigo}}</td>
+                <td>{{voo.companhia.nome}}</td>
+                <td>{{voo.local}}</td>
+                <td>{{voo.horario_previsto}}</td>
               </tr>
               {% endfor %}
 
@@ -62,11 +56,8 @@
 
         {% if chegadas %}
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Chegadas</h3>
-              </div>
             <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
+            <div class="card-body table-responsive p-0">
               <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>

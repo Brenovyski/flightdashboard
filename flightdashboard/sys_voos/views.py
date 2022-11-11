@@ -16,6 +16,8 @@ from sys_voos.models import CompanhiaAerea, Voo, Partida, Chegada
 from django.utils import timezone
 from datetime import datetime
 
+from django.views.generic import ListView
+
 from django.views.generic.base import TemplateView
 
 def index(request):
@@ -38,6 +40,11 @@ class painel(TemplateView):
         context['chegadas'] = Chegada.objects.all()
         print(context)
         return context
+    
+class voos(ListView):
+    template_name = "sys_voos/voos.html"
+    model = Voo
+
 
 def check_status_order_partida(status_now, status_applied):
     status_order = {
