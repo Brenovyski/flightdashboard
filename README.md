@@ -79,11 +79,13 @@ Johan Su Kwok - NUSP: 10770176
 
     Rode esse comando 3 vezes para criar 3 credenciais diferentes conforme o seguinte padrão:
 
-    | Username      | Email address             | Password    |
-    |---------------|---------------------------|-------------|
-    | Administrador | admin@flightdashboard.com | admin       |
-    | Funcionario   | func@flightdashboard.com  | func        |
-    | Gerente       | geren@flightdashboard.com | geren       |
+    | Username      | Email address              | Password    |
+    |---------------|----------------------------|-------------|
+    | Administrador | admin@flightdashboard.com  | admin       |
+    | Funcionario   | func@flightdashboard.com   | func        |
+    | Torre         | torre@flightdashboard.com  | torre       |
+    | Piloto        | piloto@flightdashboard.com | piloto      |
+    | Gerente       | geren@flightdashboard.com  | geren       |
 
    Para fins de desenvolvimento, pode-se também criar um login no molde abaixo:
 
