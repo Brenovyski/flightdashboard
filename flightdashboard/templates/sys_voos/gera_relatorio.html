@@ -9,12 +9,79 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Página do relatório</h1>
+            <h1 class="m-0"></h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+    <div class="content">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Geração de relatórios</h2>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <!-- we are adding the accordion ID so Bootstrap's collapse plugin detects it -->
+        <div id="accordion">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h4 class="card-title w-100">
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                  Relatório de partidas
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                Direciona para a tela de geração de relatório de partidas. O relatório de partidas disponibiliza uma lista de partidas vinculados aos voos.
+                <br>
+                <br>
+                <a href="{% url 'relatorio_partidas' %}" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <div class="card card-danger">
+            <div class="card-header">
+              <h4 class="card-title w-100">
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
+                  Relatório de chegadas por companhia aérea
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                Direciona para a tela de geração de relatório de chegadas por companhia aérea. O relatório de chegadas disponibiliza uma lista de chegadas vinculados aos voos.
+                <br>
+                <br>
+                <a href="{% url 'relatorio_chegadas' %}" class="btn btn-danger">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <div class="card card-success">
+            <div class="card-header">
+              <h4 class="card-title w-100">
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">
+                  Relatório de movimentações de voo em um período
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                Direciona para a tela de geração de relatório de movimentacoes de voo. O relatório de movimentacoes disponibiliza uma lista de partidas/chegadas vinculados aos voos.
+                <br>
+                <br>
+                <a href="{% url 'relatorio_movimentacoes' %}" class="btn btn-success">Acessar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+   </div>
 
   </div>
 {% else %}

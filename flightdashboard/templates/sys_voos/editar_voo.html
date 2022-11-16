@@ -10,7 +10,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Edição de voo</h1>
+            <h1 class="m-0"></h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -21,7 +21,7 @@
    <!-- Main content -->
    <div class="content">
     <!-- general form elements -->
-    <div class="card card-primary">
+    <div class="card card-warning">
         <div class="card-header">
           <h3 class="card-title">Edição de voo</h3>
         </div>
@@ -30,7 +30,7 @@
         <form method="POST" action="{% url 'editar_voo' %}" >
           {% csrf_token %}
           <div class="card-body">
-            <h5>Preencha os campos que você quer mudar, deixe em branco os campos que você quer manter.</h5>
+            <h5>Preencha os campos que deseja alterar. Deixe vazio os campos que não deseja alterar.</h5>
 
             <div class="form-group">
               <label for="codigo">Código de voo</label>
@@ -48,31 +48,11 @@
               <label for="horario_previsto">Horário Previsto (formato => 14:24 27/03/1999)</label>
               <input name="horario_previsto" type="time" class="form-control" id="horario_previsto">
             </div>
-            <!-- <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputFile">File input</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile">
-                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                  <span class="input-group-text">Upload</span>
-                </div>
-              </div>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> -->
           </div>
           <!-- /.card-body -->
           
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Editar voo</button>
+            <button type="submit" class="btn btn-warning">Editar voo</button>
             {% if obj %}
             <p style="color:green">Voo editado com sucesso</p>
             {% endif %} 

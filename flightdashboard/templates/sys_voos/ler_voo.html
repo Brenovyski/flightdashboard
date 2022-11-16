@@ -19,8 +19,39 @@
 
     <!-- Main content -->
   <div class="content">
+ <!-- general form elements -->
+ <div class="card card-primary">
+  <div class="card-header">
+    <h3 class="card-title">Leitura de voo</h3>
   </div>
-  <!-- /.content -->
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form method="POST" action="{% url 'ler_voo' %}" >
+    {% csrf_token %}
+    <div class="card-body">
+      <div class="form-group">
+        <label for="codigo">Código de voo</label>
+        <input name="codigo"type="text" class="form-control" id="codigo" placeholder="AA0000">
+      </div>
+    </div>
+    <!-- /.card-body -->
+    
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Ler voo</button>
+      {% if voo %}
+      <br>
+      <br>
+      <p><strong>Código:</strong> {{ voo.codigo }}</p> <!-- author detail link not yet defined -->
+      <p><strong>Companhia:</strong> {{ voo.companhia.nome }}</p>
+      <p><strong>Horario Previsto:</strong> {{ voo.horario_previsto }}</p>
+      <p><strong>Local:</strong> {{ voo.local }}</p>
+      {% endif %} 
+    </div>
+  </form>
+</div>
+<!-- /.card -->
+</div>
+<!-- /.content -->
 </div>
 {% else %}
   {% include 'base/error.html' %}

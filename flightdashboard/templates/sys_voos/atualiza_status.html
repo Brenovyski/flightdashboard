@@ -1,22 +1,77 @@
 {% extends 'base/index.html' %}
 {% load static %}
-
 {% block body %}
-{% if user.username == "Funcionario" or user.username == "Desenvolvedor" %}
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-            <h1 class="m-0">Página de atualização de status</h1>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+{% if user.username == "Funcionario" or user.username == "Desenvolvedor" or user.username == "Torre" or user.username == "Piloto" %}
+<div class="content-wrapper">
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+      <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+          <h1 class="m-0"></h1>
+          </div><!-- /.col -->
+      </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
   </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+<div class="content">
+  <!-- general form elements -->
+  <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Atualização status do voo</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form id="form" method="POST" action="{% url 'atualiza_status' %}" >
+        {% csrf_token %}
+        <div class="card-body">
+          <div class="form-group">
+            <label for="exampleSelectBorder">Tipo de voo</label>
+            <select id="vootype" name="vootype" class="custom-select rounded-0" form="form">      
+              <option value="partida">Partida</option>
+              <option value="chegada">Chegada</option>
+            </select>
+          </div>     
+
+          <div class="form-group">
+            <label for="codigo">Código de voo</label>
+            <input name="codigo"type="text" class="form-control" id="codigo" placeholder="AA0000">
+          </div>
+          <div class="form-group">
+            <label for="exampleSelectBorder">Status</label>
+            <select id="statusform" name="statusform" class="custom-select rounded-0" form="form">      
+              <option value="EM">Embarcando</option>
+              <option value="CA">Cancelado</option>
+              <option value="PR">Programado</option>
+              <option value="TA">Taxeando</option>
+              <option value="PO">Pronto</option>
+              <option value="AU">Autorizado</option>
+              <option value="VO">Em voo</option>
+              <option value="AT">Aterrisado</option>
+            </select>
+          </div>          
+        </div>
+        <!-- /.card-body -->
+        
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Atualizar</button>
+          {% if obj %}
+          <p style="color:green">Voo atualizado com sucesso</p>
+          {% endif %} 
+          {% if error %}
+          <p style="color:red">Voo não foi atualizado com sucesso, verifique a formatação dos dados. {{error}}</p>
+          {% endif %} 
+        </div>
+      </form>
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.content -->
+</div>
 {% else %}
-  {% include 'base/error.html' %}
-{% endif %} 
+{% include 'base/error.html' %}
+{% endif %}
 {% endblock body %}

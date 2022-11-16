@@ -48,9 +48,21 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">        
             <li class="nav-item">
-              <a {% if request.resolver_match.view_name == 'crud' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'crud' %}">
+              <a {% if request.resolver_match.view_name == 'crud' %}          class="nav-link active" 
+                 {% elif request.resolver_match.view_name == 'criar_voo' %}   class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'deletar_voo' %} class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'editar_voo' %}  class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'ler_voo' %}     class="nav-link active"
+                 {% else %} class="nav-link" 
+                 {% endif %} href="{% url 'crud' %}">
                 &nbsp;<i class="fa-solid fa-database fa-xl"></i>
                 &nbsp;&nbsp;<p>CRUD</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a {% if request.resolver_match.view_name == 'painel' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'painel' %}">
+                <i class="fa-solid fa-table fa-xl"></i>
+                &nbsp;&nbsp;<p>Painel</p>
               </a>
             </li>
             <li class="nav-item">
@@ -60,7 +72,11 @@
               </a>
             </li>
             <li class="nav-item">
-              <a {% if request.resolver_match.view_name == 'gera_relatorio' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'gera_relatorio' %}">
+              <a {% if request.resolver_match.view_name == 'gera_relatorio' %}             class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'relatorio_chegadas' %}       class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'relatorio_partidas' %}       class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'relatorio_movimentacoes' %}  class="nav-link active" 
+                 {% else %} class="nav-link" {% endif %} href="{% url 'gera_relatorio' %}">
                 &nbsp;<i class="fa-regular fa-file-lines fa-xl"></i>
                 &nbsp;&nbsp;&nbsp;<p>Gerar Relatório</p>
               </a>
