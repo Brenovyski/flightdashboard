@@ -23,7 +23,12 @@ from django.views.generic.base import TemplateView
 def index(request):
     return render(request, 'sys_voos/index.html')
 
-#esboco dos urls apenas para renderizar as paginas requeridas
+def lockout(request, credentials):
+    context = {
+        'obj': True,
+        'error': "Account blocked due to 3 failed attemps. Please contact the administrator for further informations.", 
+    }
+    return render(request, 'registration/login.html', context)
 
 def crud(request):
     return render(request, 'sys_voos/crud.html')
