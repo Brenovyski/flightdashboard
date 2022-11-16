@@ -132,6 +132,7 @@ Johan Su Kwok - NUSP: 10770176
    python manage.py axes_reset_username [username ...]
    ```
 
-   Para mais informações, segue a documentação: <https://django-axes.readthedocs.io/en/latest/3_usage.html#resetting-attempts-and-lockouts>
+   Para mais informações, segue a documentação: 
+   <https://django-axes.readthedocs.io/en/latest/3_usage.html#resetting-attempts-and-lockouts>
 
 
