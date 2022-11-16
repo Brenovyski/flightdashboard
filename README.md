@@ -109,7 +109,7 @@ Johan Su Kwok - NUSP: 10770176
 
 ## Observações
 
-O sistema comporta as seguintes companhias aéreas pré-determinadas:
+1. O sistema comporta as seguintes companhias aéreas pré-determinadas:
 
 | Companhia | Código | 
 |-----------|--------|
@@ -118,3 +118,20 @@ O sistema comporta as seguintes companhias aéreas pré-determinadas:
 | Latam     | LA     |
 | Lufthansa | LF     |
 | Emirates  | EM     |
+
+2. O sistema de login funciona com os aplicativos padrão do Django para a autenticação.
+   O bloqueio de contas seguindo 3 tentativas de login por usuário funciona com a aplicação `axes` e tem algumas funcionalidades:
+
+   Para limpar o histórico de tentativas de login de todos os usuários rode o seguinte comando:
+   ```
+   python manage.py axes_reset
+   ```
+
+   Para limpar o histórico de tentativas de login de apenas alguns usuários rode o seguinte comando:
+   ```
+   python manage.py axes_reset_username [username ...]
+   ```
+
+   Para mais informações, segue a documentação: <https://django-axes.readthedocs.io/en/latest/3_usage.html#resetting-attempts-and-lockouts>
+
+
