@@ -18,6 +18,14 @@
       <div class="image">
         <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
+      {% elif user.username == "Torre" %}
+      <div class="image">
+        <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      {% elif user.username == "Piloto" %}
+      <div class="image">
+        <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
+      </div>
       {% elif user.username == "Gerente" %}
       <div class="image">
         <img src="{% static 'dist/img/geren.png'%}" class="img-circle elevation-2" alt="User Image">
@@ -53,6 +61,7 @@
                  {% elif request.resolver_match.view_name == 'deletar_voo' %} class="nav-link active"
                  {% elif request.resolver_match.view_name == 'editar_voo' %}  class="nav-link active"
                  {% elif request.resolver_match.view_name == 'ler_voo' %}     class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'voos' %}     class="nav-link active"
                  {% else %} class="nav-link" 
                  {% endif %} href="{% url 'crud' %}">
                 &nbsp;<i class="fa-solid fa-database fa-xl"></i>

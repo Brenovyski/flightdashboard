@@ -258,8 +258,9 @@ def deletar_voo(request):
         return render(request, 'sys_voos/deletar_voo.html')
 
 
-def relatorio_chegadas(request): 
-    return render(request, 'sys_voos/relatorio_chegadas.html')
+def relatorio_chegadas(request):
+    chegadas = Chegada.objects.all(); 
+    return render(request, 'sys_voos/relatorio_chegadas.html', {'chegadas':chegadas})
 
 def relatorio_movimentacoes(request): 
     return render(request, 'sys_voos/relatorio_movimentacoes.html')
