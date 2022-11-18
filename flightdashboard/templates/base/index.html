@@ -84,30 +84,6 @@
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-light">
     <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Controlador de conteúdo</h5>
-      <div class="info-box">
-        <span {% if request.resolver_match.view_name == 'crud' %} class="info-box-icon bg-danger" {% else %} class="info-box-icon bg-info" {% endif %}><i class="fa-solid fa-database fa-xl"></i></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">CRUD</span>
-            <span class="info-box-number"></span>
-        </div>
-      </div>
-      <div class="info-box">
-        <span {% if request.resolver_match.view_name == 'atualiza_status' %} class="info-box-icon bg-danger" {% else %} class="info-box-icon bg-info" {% endif %}><i class="fa-solid fa-rotate fa-xl"></i></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">Status</span>
-            <span class="info-box-number"></span>
-        </div>
-      </div>
-      <div class="info-box">
-        <span {% if request.resolver_match.view_name == 'gera_relatorio' %} class="info-box-icon bg-danger" {% else %} class="info-box-icon bg-info" {% endif %}><i class="fa-regular fa-file-lines fa-xl"></i></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">Relatório</span>
-            <span class="info-box-number"></span>
-        </div>
-      </div>
-    </div>
   </aside>
   <!-- /.control-sidebar -->
 
