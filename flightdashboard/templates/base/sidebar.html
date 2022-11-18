@@ -54,7 +54,15 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">        
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a {% if request.resolver_match.view_name == 'painel' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'painel' %}">
+            <i class="fa-solid fa-table fa-xl"></i>
+            &nbsp;&nbsp;<p>Painel</p>
+          </a>
+        </li>
+        {% if user.username != "Painel" %}
+        
             <li class="nav-item">
               <a {% if request.resolver_match.view_name == 'crud' %}          class="nav-link active" 
                  {% elif request.resolver_match.view_name == 'criar_voo' %}   class="nav-link active"
@@ -67,13 +75,7 @@
                 &nbsp;<i class="fa-solid fa-database fa-xl"></i>
                 &nbsp;&nbsp;<p>CRUD</p>
               </a>
-            </li>
-            <li class="nav-item">
-              <a {% if request.resolver_match.view_name == 'painel' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'painel' %}">
-                <i class="fa-solid fa-table fa-xl"></i>
-                &nbsp;&nbsp;<p>Painel</p>
-              </a>
-            </li>
+            </li>      
             <li class="nav-item">
               <a {% if request.resolver_match.view_name == 'atualiza_status' %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'atualiza_status' %}">
                 <i class="fa-solid fa-rotate fa-xl"></i>
@@ -90,6 +92,8 @@
                 &nbsp;&nbsp;&nbsp;<p>Gerar Relatório</p>
               </a>
             </li>
+        {% endif %}
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

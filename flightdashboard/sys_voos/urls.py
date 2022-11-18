@@ -7,6 +7,8 @@ urlpatterns = [
     path("crud", views.crud, name="crud"),
     path("gera_relatorio", views.gera_relatorio, name="gera_relatorio"),
     path("painel", views.painel.as_view(), name="painel"),
+    path("painel2", views.painel2.as_view(), name="painel2"),
+
     path("voos", views.voos.as_view(), name="voos"),
     path("atualiza_status", views.atualiza_status, name="atualiza_status"),
     path("criar_voo", views.criar_voo, name="criar_voo"),

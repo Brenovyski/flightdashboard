@@ -1,0 +1,132 @@
+{% if user.is_anonymous %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{% static 'dist/img/icon_logo.png' %}" type="image/x-icon">
+  <title>Login | Flight Dashboard</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Font Awesome Free Kit Icon  -->
+  <script src="https://kit.fontawesome.com/d2c5d61015.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+
+</head>
+
+    {% if not partidas and not chegadas%}
+    <p><strong>Não há voos para monitorar.</strong></p>
+    {% endif %} 
+
+    {% if partidas %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Partidas</h3>
+          </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Companhia</th>
+                <th>Status</th>
+                <th>Local</th>
+                <th>Horário Previsto</th>
+                <th>Horário Real</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for partida in partidas %}
+              <tr>
+                <td>{{partida.voo.id}}</td>
+                <td>{{partida.voo.codigo}}</td>
+                <td>{{partida.voo.companhia.nome}}</td>
+                <td>{% if partida.status == "EM" %} 
+                      Embarcando
+                    {% elif partida.status == "CA"%}
+                      Cancelado
+                    {% elif partida.status == "PR"%}
+                      Programado
+                    {% elif partida.status == "TA"%}
+                      Taxeando
+                    {% elif partida.status == "PO"%}
+                      Pronto
+                    {% elif partida.status == "AU"%}
+                      Autorizado
+                    {% elif partida.status == "VO"%}
+                      Em voo
+                    {% endif %}
+                </td>
+                <td>{{partida.voo.local}}</td>
+                <td>{{partida.voo.horario_previsto}}</td>
+                <td>{{partida.horario_real}}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+        {% endif %} 
+
+        {% if chegadas %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Chegadas</h3>
+              </div>
+            <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Código</th>
+                    <th>Companhia</th>
+                    <th>Status</th>
+                    <th>Local</th>
+                    <th>Horário Previsto</th>
+                    <th>Horário Real</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for chegada in chegadas %}
+                  <tr>
+                    <td>{{chegada.voo.id}}</td>
+                    <td>{{chegada.voo.codigo}}</td>
+                    <td>{{chegada.voo.companhia.nome}}</td>
+                    <td>{% if chegada.status == "VO" %} 
+                          Em voo
+                        {% elif chegada.status == "AT"%}
+                          Aterrisado 
+                        {% endif %}
+                    </td>
+                    <td>{{chegada.voo.local}}</td>
+                    <td>{{chegada.voo.horario_previsto}}</td>
+                    <td>{{chegada.horario_real}}</td>
+                  </tr>
+                  {% endfor %}
+    
+                </tbody>
+              </table>
+            </div>
+    {% endif %} 
+    
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.content -->
+</div>
+{% endif %} 

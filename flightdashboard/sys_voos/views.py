@@ -44,6 +44,16 @@ class painel(TemplateView):
         context['partidas'] = Partida.objects.all()
         context['chegadas'] = Chegada.objects.all()
         return context
+
+class painel2(TemplateView):
+    template_name = "sys_voos/painel2.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['partidas'] = Partida.objects.all()
+        context['chegadas'] = Chegada.objects.all()
+        return context
+
     
 class voos(ListView):
     template_name = "sys_voos/voos.html"
