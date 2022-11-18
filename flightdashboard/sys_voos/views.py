@@ -78,10 +78,13 @@ def atualiza_status(request):
         if request.POST['vootype'] == 'partida':
             try:
                 partida_instance = get_object_or_404(Partida, voo=voo_instance)
+                print("OI")
+                print()
+
                 if check_status_order_partida(partida_instance.status, request.POST['statusform']):
                     partida_instance.status = request.POST['statusform']
                     if request.POST['statusform'] == 'VO':
-                        partida_instance.horario_real = timezone.now()
+                        partida_instance.horario_real = timezone.localtime(timezone.now())
                     partida_instance.save()
                     messages.success(request, "Voo atualizado com sucesso.")
                 else:
@@ -92,7 +95,7 @@ def atualiza_status(request):
                         partida = {
                             'voo': voo_instance,
                             'status': request.POST['statusform'],
-                            'data': timezone.now(),
+                            'data': timezone.localtime(timezone.now()),
                         }
                         record = Partida(**partida)
                         record.save()
@@ -105,7 +108,7 @@ def atualiza_status(request):
                 chegada_instance = get_object_or_404(Chegada, voo=voo_instance)
                 if request.POST['statusform'] == 'AT':
                     chegada_instance.status = request.POST['statusform']
-                    chegada_instance.horario_real = timezone.now()
+                    chegada_instance.horario_real = timezone.localtime(timezone.now())
                     chegada_instance.save()
                     messages.success(request, "Voo atualizado com sucesso.")
                 else:
@@ -116,7 +119,7 @@ def atualiza_status(request):
                         chegada = {
                             'voo': voo_instance,
                             'status': request.POST['statusform'],
-                            'data': timezone.now(),
+                            'data': timezone.localtime(timezone.now()),
                         }
                         record = Chegada(**chegada)
                         record.save()
