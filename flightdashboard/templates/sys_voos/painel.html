@@ -17,7 +17,7 @@
 
     <!-- Main content -->
   <div class="content">
-    {% if not partidas or not chegadas%}
+    {% if not partidas and not chegadas%}
     <p><strong>Não há voos para monitorar.</strong></p>
     {% endif %} 
 
@@ -46,7 +46,22 @@
                 <td>{{partida.voo.id}}</td>
                 <td>{{partida.voo.codigo}}</td>
                 <td>{{partida.voo.companhia.nome}}</td>
-                <td>{{partida.status}}</td>
+                <td>{% if partida.status == "EM" %} 
+                      Embarcando
+                    {% elif partida.status == "CA"%}
+                      Cancelado
+                    {% elif partida.status == "PR"%}
+                      Programado
+                    {% elif partida.status == "TA"%}
+                      Taxeando
+                    {% elif partida.status == "PO"%}
+                      Pronto
+                    {% elif partida.status == "AU"%}
+                      Autorizado
+                    {% elif partida.status == "VO"%}
+                      Em voo
+                    {% endif %}
+                </td>
                 <td>{{partida.voo.local}}</td>
                 <td>{{partida.voo.horario_previsto}}</td>
                 <td>{{partida.horario_real}}</td>
@@ -85,7 +100,12 @@
                     <td>{{chegada.voo.id}}</td>
                     <td>{{chegada.voo.codigo}}</td>
                     <td>{{chegada.voo.companhia.nome}}</td>
-                    <td>{{chegada.status}}</td>
+                    <td>{% if chegada.status == "VO" %} 
+                          Em voo
+                        {% elif chegada.status == "AT"%}
+                          Aterrisado 
+                        {% endif %}
+                    </td>
                     <td>{{chegada.voo.local}}</td>
                     <td>{{chegada.voo.horario_previsto}}</td>
                     <td>{{chegada.horario_real}}</td>

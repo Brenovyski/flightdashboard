@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Relatório de chegadas por companhia aérea</h3>
+              <h3 class="card-title">Relatório de chegadas</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -41,7 +41,13 @@
                     <td> {{ chegada.voo.codigo }} </td>
                     <td> {{ chegada.horario_real }} </td>
                     <td> {{ chegada.data }} </td>
-                    <td> {{ chegada.status }}</td>
+                    <td>
+                        {% if chegada.status == "VO" %} 
+                          Em voo
+                        {% elif chegada.status == "AT"%}
+                          Aterrisado 
+                        {% endif %}
+                    </td>
                   </tr>
                 {% endfor %}
                 </tbody>

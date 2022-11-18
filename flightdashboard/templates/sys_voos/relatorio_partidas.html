@@ -41,7 +41,23 @@
                     <td> {{ partida.voo.codigo }} </td>
                     <td> {{ partida.horario_real }} </td>
                     <td> {{ partida.data }} </td>
-                    <td> {{ partida.status }}</td>
+                    <td>
+                        {% if partida.status == "EM" %} 
+                          Embarcando
+                        {% elif partida.status == "CA"%}
+                          Cancelado
+                        {% elif partida.status == "PR"%}
+                          Programado
+                        {% elif partida.status == "TA"%}
+                          Taxeando
+                        {% elif partida.status == "PO"%}
+                          Pronto
+                        {% elif partida.status == "AU"%}
+                          Autorizado
+                        {% elif partida.status == "VO"%}
+                          Em voo
+                        {% endif %}
+                    </td>
                   </tr>
                 {% endfor %}
                 </tbody>
