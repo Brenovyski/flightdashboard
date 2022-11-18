@@ -119,6 +119,8 @@ Johan Su Kwok - NUSP: 10770176
 | Lufthansa | LF     |
 | Emirates  | EM     |
 
+O sistema não permite criar um voo com uma companhia aérea inexistente. Para criar companhias aéreas, acesse o admin do Django (http://localhost:8000/admin/) e logue com a crendencial. Clique em "Companhia aereas" na tabela "SYS_VOOS" e crie um novo objeto.
+
 2. O sistema de login funciona com os aplicativos padrão do Django para a autenticação.
    O bloqueio de contas seguindo 3 tentativas de login por usuário funciona com a aplicação `axes` e tem algumas funcionalidades:
 
@@ -134,5 +136,6 @@ Johan Su Kwok - NUSP: 10770176
 
    Para mais informações, segue a documentação: 
    <https://django-axes.readthedocs.io/en/latest/3_usage.html#resetting-attempts-and-lockouts>
+
 
 

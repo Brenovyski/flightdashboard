@@ -133,23 +133,18 @@ def criar_voo(request):
                 get_object_or_404(Voo, codigo=request.POST['codigo'])   
                 raise MultipleObjectsReturned
             except MultipleObjectsReturned as error:
+                messages.error(request, str(error) + "Codigo já existe. Digite um novo.")
                 print(error)
-                context = {
-                    'obj': False,
-                    'error': str(error) + "Codigo já existe. Digite um novo.", 
-                }
-                return render(request, 'sys_voos/criar_voo.html', context)
+                return render(request, 'sys_voos/criar_voo.html')
             except Exception as error:
                 a = True
                 print(error.__class__.__name__)
+                print(error)
                 if "No Voo matches the given query." in str(error):
-                    a = False
-                context = {
-                    'obj': False,
-                    'error': error, 
-                }
-                if a:
-                    return render(request, 'sys_voos/criar_voo.html', context)
+                    pass
+                else:
+                    messages.error(request, str(error))
+                    return render(request, 'sys_voos/criar_voo.html')
             horario_stripped = datetime.strptime(request.POST['horario_previsto'], "%H:%M")
             companhia_instance = get_object_or_404(CompanhiaAerea, nome=request.POST['companhia'])
             voo = {
@@ -158,34 +153,17 @@ def criar_voo(request):
                 'local': request.POST['local'],
                 'horario_previsto': horario_stripped,
             }
-
             record = Voo(**voo)
             record.save()
             print(voo)
-            context = {
-                'obj': True,
-                'error': False,
-            }
+            messages.success(request, "Voo criado com sucesso.")
         except Exception as error:
             if "No CompanhiaAerea matches the given query." in str(error):
-                error = "Essa companhia aérea não existe."
-            context = {
-                'obj': False,
-                'error': error, 
-            }
-            return render(request, 'sys_voos/criar_voo.html', context)
-        except:
-            context = {
-                'obj': False,
-                'error': True, 
-            }
-            return render(request, 'sys_voos/criar_voo.html', context)
-    else:
-        context = {
-            'obj': False,
-            'error': False,
-        }
-    return render(request, 'sys_voos/criar_voo.html', context)
+                messages.error(request, "Essa companhia aérea não existe.")
+            else:
+                messages.error(request, error)
+            return render(request, 'sys_voos/criar_voo.html')
+    return render(request, 'sys_voos/criar_voo.html')
 
 def editar_voo(request): 
     if request.method == 'POST':
@@ -200,27 +178,15 @@ def editar_voo(request):
                 horario_stripped = datetime.strptime(request.POST['horario_previsto'], "%H:%M")
                 voo_instance.horario_previsto = horario_stripped
             voo_instance.save()
-            context = {
-                'obj': True,
-                'error': False,
-            }
+            messages.success(request, "Voo editado com sucesso.")
         except Exception as error:
             print(error.__class__.__name__)
             if "No Voo matches the given query." in str(error):
-                error = "Esse código de voo não existe."
+                messages.error(request, "Esse código de voo não existe.")
             if "No CompanhiaAerea matches the given query." in str(error):
-                error = "Essa companhia aérea não existe."
-            context = {
-                'obj': False,
-                'error': error, 
-            }
-            return render(request, 'sys_voos/editar_voo.html', context)
-    else:
-        context = {
-            'obj': False,
-            'error': False,
-        }
-    return render(request, 'sys_voos/editar_voo.html', context)
+                messages.error(request,"Essa companhia aérea não existe.")
+            return render(request, 'sys_voos/editar_voo.html')
+    return render(request, 'sys_voos/editar_voo.html')
 
 
 def ler_voo(request): 
