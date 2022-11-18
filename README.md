@@ -110,16 +110,15 @@ Johan Su Kwok - NUSP: 10770176
 ## Observações
 
 1. O sistema comporta as seguintes companhias aéreas pré-determinadas:
+    | Companhia | Código | 
+    |-----------|--------|
+    | Azul      | AZ     |
+    | Gol       | GO     |
+    | Latam     | LA     |
+    | Lufthansa | LF     |
+    | Emirates  | EM     |
 
-| Companhia | Código | 
-|-----------|--------|
-| Azul      | AZ     |
-| Gol       | GO     |
-| Latam     | LA     |
-| Lufthansa | LF     |
-| Emirates  | EM     |
-
-O sistema não permite criar um voo com uma companhia aérea inexistente. Para criar companhias aéreas, acesse o admin do Django (http://localhost:8000/admin/) e logue com a crendencial. Clique em "Companhia aereas" na tabela "SYS_VOOS" e crie um novo objeto.
+    O sistema não permite criar um voo com uma companhia aérea inexistente. Para criar companhias aéreas, acesse o admin do Django (http://localhost:8000/admin/) e logue com a crendencial. Clique em "Companhia aereas" na tabela "SYS_VOOS" e crie um novo objeto.
 
 2. O sistema de login funciona com os aplicativos padrão do Django para a autenticação.
    O bloqueio de contas seguindo 3 tentativas de login por usuário funciona com a aplicação `axes` e tem algumas funcionalidades:
