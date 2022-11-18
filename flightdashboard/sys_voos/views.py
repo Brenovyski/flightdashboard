@@ -43,7 +43,6 @@ class painel(TemplateView):
         context = super().get_context_data(**kwargs)
         context['partidas'] = Partida.objects.all()
         context['chegadas'] = Chegada.objects.all()
-        print(context)
         return context
     
 class voos(ListView):
@@ -70,7 +69,6 @@ def check_status_order_partida(status_now, status_applied):
 def atualiza_status(request):
     if request.method == 'POST':
         try:
-            print(request.POST)
             voo_instance = get_object_or_404(Voo, codigo=request.POST['codigo'])
         except Exception as error:
             messages.error(request, "Código de voo inválido, tente novamente.")
@@ -78,9 +76,6 @@ def atualiza_status(request):
         if request.POST['vootype'] == 'partida':
             try:
                 partida_instance = get_object_or_404(Partida, voo=voo_instance)
-                print("OI")
-                print()
-
                 if check_status_order_partida(partida_instance.status, request.POST['statusform']):
                     partida_instance.status = request.POST['statusform']
                     if request.POST['statusform'] == 'VO':
@@ -137,12 +132,8 @@ def criar_voo(request):
                 raise MultipleObjectsReturned
             except MultipleObjectsReturned as error:
                 messages.error(request, str(error) + "Codigo já existe. Digite um novo.")
-                print(error)
                 return render(request, 'sys_voos/criar_voo.html')
             except Exception as error:
-                a = True
-                print(error.__class__.__name__)
-                print(error)
                 if "No Voo matches the given query." in str(error):
                     pass
                 else:
@@ -158,7 +149,6 @@ def criar_voo(request):
             }
             record = Voo(**voo)
             record.save()
-            print(voo)
             messages.success(request, "Voo criado com sucesso.")
         except Exception as error:
             if "No CompanhiaAerea matches the given query." in str(error):
@@ -183,7 +173,6 @@ def editar_voo(request):
             voo_instance.save()
             messages.success(request, "Voo editado com sucesso.")
         except Exception as error:
-            print(error.__class__.__name__)
             if "No Voo matches the given query." in str(error):
                 messages.error(request, "Esse código de voo não existe.")
             if "No CompanhiaAerea matches the given query." in str(error):
@@ -202,8 +191,6 @@ def ler_voo(request):
             }
             return render(request, 'sys_voos/ler_voo.html', context)
         except Exception as error:
-            print(error.__class__.__name__)
-            print(error)
             if "No Voo matches the given query." in str(error):
                 messages.error(request, "Código de voo inválido, voo não existe.")
             return render(request, 'sys_voos/ler_voo.html', context)
