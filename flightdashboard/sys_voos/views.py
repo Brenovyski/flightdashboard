@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from django.shortcuts import get_object_or_404
 
-from sys_voos.forms import CodigoForm
+from sys_voos.forms import CodigoForm, FilterForm
 from sys_voos.models import Voo
 from django.core.exceptions import MultipleObjectsReturned
 
@@ -232,6 +232,17 @@ def relatorio_movimentacoes(request):
     return render(request, 'sys_voos/relatorio_movimentacoes.html')
 
 def relatorio_partidas(request):
-    partidas = Partida.objects.all(); 
-    return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas})
+    if request.method == 'POST':
+        form = FilterForm(request.POST)
+        if form.is_valid():
+            data_inicio = form.cleaned_data['data_inicio']
+            data_fim = form.cleaned_data['data_fim']
+            status = form.cleaned_data['status']
+            partidas = Partida.objects.filter(data=[data_inicio, data_fim]).filter(status=status)
+            contagem = Partida.objects.filter(data=[data_inicio, data_fim]).filter(status=status).count()
+            return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem})
+    else:
+        partidas = Partida.objects.all()
+        contagem = Partida.objects.count() 
+        return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem})
 
