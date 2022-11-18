@@ -3,6 +3,7 @@ from django.test import TestCase
 from sys_voos.models import CompanhiaAerea, Voo, Partida, Chegada
 
 import datetime
+from django.utils import timezone
 
 class CompanhiaAereaTest(TestCase):
   @classmethod
@@ -61,7 +62,7 @@ class PartidaModelTest(TestCase):
     horario = datetime.time(10,30) #10 horas e 30 min
     Voo.objects.create(companhia=companhia_1, horario_previsto=horario, local='Argentina')
     voo_1 = Voo.objects.get(companhia=companhia_1)
-    dia = datetime.datetime(2022, 10, 20, tzinfo=datetime.timezone.utc)
+    dia = datetime.date(2022, 10, 2)
     Partida.objects.create(voo=voo_1, data=dia)
 
   def test_partida_id(self):
@@ -72,7 +73,7 @@ class PartidaModelTest(TestCase):
   def test_partida_data(self):
     voo_1 = Voo.objects.get(id=1)
     partida_1 = Partida.objects.get(voo=voo_1)
-    self.assertEqual(partida_1.data, datetime.datetime(2022, 10, 20, tzinfo=datetime.timezone.utc))
+    self.assertEqual(partida_1.data, datetime.date(2022, 10, 2))
 
   def test_partida_status(self):
     voo_1 = Voo.objects.get(id=1)
@@ -92,7 +93,7 @@ class ChegadaModelTest(TestCase):
     horario = datetime.time(10,30) #10 horas e 30 min
     Voo.objects.create(companhia=companhia_1, horario_previsto=horario, local='Argentina')
     voo_1 = Voo.objects.get(companhia=companhia_1)
-    dia = datetime.datetime(2022, 11, 21, tzinfo=datetime.timezone.utc)
+    dia = datetime.date(2022, 11, 21)
     Chegada.objects.create(voo=voo_1, data=dia)
 
   def test_chegada_id(self):
@@ -103,7 +104,7 @@ class ChegadaModelTest(TestCase):
   def test_chegada_data(self):
     voo_1 = Voo.objects.get(id=1)
     chegada_1 = Chegada.objects.get(voo=voo_1)
-    self.assertEqual(chegada_1.data, datetime.datetime(2022, 11, 21, tzinfo=datetime.timezone.utc))
+    self.assertEqual(chegada_1.data, datetime.date(2022, 11, 21))
 
   def test_chegada_status(self):
     voo_1 = Voo.objects.get(id=1)
