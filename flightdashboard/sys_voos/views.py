@@ -225,8 +225,36 @@ def deletar_voo(request):
 
 
 def relatorio_chegadas(request):
-    chegadas = Chegada.objects.all(); 
-    return render(request, 'sys_voos/relatorio_chegadas.html', {'chegadas':chegadas})
+    if request.method == 'POST':
+        form = FilterForm(request.POST)
+        if form.is_valid():
+            data_inicio = form.cleaned_data['data_inicio'].strftime('%Y-%m-%d')
+            data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
+            status = form.cleaned_data['status']
+            chegadas = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
+            contagem = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status).count()
+            list_companhias = []
+            for chegada in chegadas:
+                list_companhias.append(chegada.voo.companhia.nome)
+            dict_companhias = dict()
+            for i in list_companhias:
+                dict_companhias[i] = dict_companhias.get(i, 0) + 1
+            print(dict_companhias)
+            context = {
+                'chegadas':chegadas, 
+                'contagem':contagem, 
+                'data_inicio': data_inicio, 
+                'data_fim' : data_fim,
+                'status': status,
+                'parameters': True,
+                'dict_companhias': dict_companhias,
+            }
+            return render(request, 'sys_voos/relatorio_chegadas.html', context)
+    else:
+        chegadas = Chegada.objects.all()
+        contagem = Chegada.objects.count() 
+        return render(request, 'sys_voos/relatorio_chegadas.html', {'chegadas':chegadas, 'contagem':contagem, 'parameters': False})
+
 
 def relatorio_movimentacoes(request): 
     return render(request, 'sys_voos/relatorio_movimentacoes.html')
@@ -235,14 +263,30 @@ def relatorio_partidas(request):
     if request.method == 'POST':
         form = FilterForm(request.POST)
         if form.is_valid():
-            data_inicio = form.cleaned_data['data_inicio']
-            data_fim = form.cleaned_data['data_fim']
+            data_inicio = form.cleaned_data['data_inicio'].strftime('%Y-%m-%d')
+            data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
             status = form.cleaned_data['status']
-            partidas = Partida.objects.filter(data=[data_inicio, data_fim]).filter(status=status)
-            contagem = Partida.objects.filter(data=[data_inicio, data_fim]).filter(status=status).count()
-            return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem})
+            partidas = Partida.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
+            contagem = Partida.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status).count()
+            list_companhias = []
+            for partida in partidas:
+                list_companhias.append(partida.voo.companhia.nome)
+            dict_companhias = dict()
+            for i in list_companhias:
+                dict_companhias[i] = dict_companhias.get(i, 0) + 1
+            print(dict_companhias)
+            context = {
+                'partidas':partidas, 
+                'contagem':contagem, 
+                'data_inicio': data_inicio, 
+                'data_fim' : data_fim,
+                'status': status,
+                'parameters': True,
+                'dict_companhias': dict_companhias,
+            }
+            return render(request, 'sys_voos/relatorio_partidas.html', context)
     else:
         partidas = Partida.objects.all()
         contagem = Partida.objects.count() 
-        return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem})
+        return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem, 'parameters': False})
 
