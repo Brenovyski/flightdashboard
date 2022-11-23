@@ -232,7 +232,7 @@ def relatorio_chegadas(request):
             data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
             status = form.cleaned_data['status']
             chegadas = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
-            contagem = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status).count()
+            contagem = chegadas.count()
             list_companhias = []
             for chegada in chegadas:
                 list_companhias.append(chegada.voo.companhia.nome)
@@ -267,7 +267,7 @@ def relatorio_partidas(request):
             data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
             status = form.cleaned_data['status']
             partidas = Partida.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
-            contagem = Partida.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status).count()
+            contagem = partidas.count()
             list_companhias = []
             for partida in partidas:
                 list_companhias.append(partida.voo.companhia.nome)
