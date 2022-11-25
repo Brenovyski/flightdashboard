@@ -339,11 +339,6 @@ def relatorio_partidas(request):
             return render(request, 'sys_voos/relatorio_partidas.html', context)
     else:
         partidas = Partida.objects.all()
-        pteste = Partida.objects.filter(data=timezone.localtime(timezone.now()))
-        print(pteste)
-        for p in pteste :
-            print(p.voo.codigo)
-        
         contagem = Partida.objects.count()
         list_companhias = []
         cont_status = [0, 0, 0, 0, 0, 0, 0]
