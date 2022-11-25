@@ -41,7 +41,8 @@
                 <th>Código</th>
                 <th>Companhia</th>
                 <th>Status</th>
-                <th>Local</th>
+                <th>Local de destino</th>
+                <th>Data</th>
                 <th>Horário Previsto</th>
                 <th>Horário Real</th>
               </tr>
@@ -69,6 +70,7 @@
                     {% endif %}
                 </td>
                 <td>{{partida.voo.local}}</td>
+                <td>{{partida.data}}</td>
                 <td>{{partida.voo.horario_previsto}}</td>
                 <td>{{partida.horario_real}}</td>
               </tr>
@@ -95,7 +97,8 @@
                     <th>Código</th>
                     <th>Companhia</th>
                     <th>Status</th>
-                    <th>Local</th>
+                    <th>Local de origem</th>
+                    <th>Data</th>
                     <th>Horário Previsto</th>
                     <th>Horário Real</th>
                   </tr>
@@ -113,6 +116,7 @@
                         {% endif %}
                     </td>
                     <td>{{chegada.voo.local}}</td>
+                    <td>{{chegada.data}}</td>
                     <td>{{chegada.voo.horario_previsto}}</td>
                     <td>{{chegada.horario_real}}</td>
                   </tr>

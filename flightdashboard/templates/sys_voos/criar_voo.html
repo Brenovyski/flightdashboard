@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
               <label for="local">Local</label>
-              <input name="local" type="text" class="form-control" id="local" placeholder="Chegada/Partida" required>
+              <input name="local" type="text" class="form-control" id="local" placeholder="Origem da chegada/Destino da partida" required>
             </div>
             <div class="form-group">
               <label for="horario_previsto">Horário Previsto </label>
@@ -50,12 +50,6 @@
           
           <div class="card-footer">
             <button type="submit" class="btn btn-success">Criar voo</button>
-            {% if obj %}
-            <p style="color:green">Voo criado com sucesso</p>
-            {% endif %} 
-            {% if error %}
-            <p style="color:red">Voo não foi criado com sucesso, verifique a formatação dos dados. {{error}}</p>
-            {% endif %} 
           </div>
         </form>
       </div>
