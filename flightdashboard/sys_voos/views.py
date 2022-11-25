@@ -186,9 +186,6 @@ def editar_voo(request):
     if request.method == 'POST':
         try:
             voo_instance = get_object_or_404(Voo, codigo=request.POST['codigo'])
-            if request.POST['companhia'] != '':
-                companhia_instance = get_object_or_404(CompanhiaAerea, nome=request.POST['companhia'])
-                voo_instance.companhia = companhia_instance
             if request.POST['local'] != '':
                 voo_instance.local = request.POST['local']
             if request.POST['horario_previsto'] != '':
@@ -199,8 +196,6 @@ def editar_voo(request):
         except Exception as error:
             if "No Voo matches the given query." in str(error):
                 messages.error(request, "Esse código de voo não existe.")
-            if "No CompanhiaAerea matches the given query." in str(error):
-                messages.error(request,"Essa companhia aérea não existe.")
             return render(request, 'sys_voos/editar_voo.html')
     return render(request, 'sys_voos/editar_voo.html')
 
