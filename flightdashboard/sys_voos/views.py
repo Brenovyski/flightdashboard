@@ -76,6 +76,7 @@ def check_status_order_partida(status_now, status_applied):
         return status_applied
     else:
         return False
+
 def atualiza_status(request):
     if request.method == 'POST':
         try:
@@ -84,8 +85,28 @@ def atualiza_status(request):
             messages.error(request, "Código de voo inválido, tente novamente.")
             return HttpResponseRedirect('/atualiza_status')
         if request.POST['vootype'] == 'partida':
-            try:
-                partida_instance = get_object_or_404(Partida, voo=voo_instance)
+
+            partidas = Partida.objects.filter(data=timezone.localtime(timezone.now()))
+            depart_available = True
+            for partida in partidas :
+                if request.POST['codigo'] == partida.voo.codigo :
+                    depart_available = False
+
+            if depart_available :
+                if request.POST['statusform'] == "EM" or request.POST['statusform'] == "CA":
+                    partida = {
+                        'voo': voo_instance,
+                        'status': request.POST['statusform'],
+                        'data': timezone.localtime(timezone.now()),
+                    }
+                    record = Partida(**partida)
+                    record.save()
+                    messages.success(request, "Voo atualizado com sucesso.")
+                else:
+                    messages.error(request, "Status inválido, tente novamente.")
+                    return HttpResponseRedirect('/atualiza_status')
+            else:
+                partida_instance = get_object_or_404(Partida, voo=voo_instance, data=timezone.localtime(timezone.now()))
                 if check_status_order_partida(partida_instance.status, request.POST['statusform']):
                     partida_instance.status = request.POST['statusform']
                     if request.POST['statusform'] == 'VO':
@@ -94,44 +115,37 @@ def atualiza_status(request):
                     messages.success(request, "Voo atualizado com sucesso.")
                 else:
                     messages.error(request, "Status inválido, tente novamente.")
-            except Exception as error:
-                if "No Partida matches the given query." in str(error):
-                    if request.POST['statusform'] == "EM" or request.POST['statusform'] == "CA":
-                        partida = {
-                            'voo': voo_instance,
-                            'status': request.POST['statusform'],
-                            'data': timezone.localtime(timezone.now()),
-                        }
-                        record = Partida(**partida)
-                        record.save()
-                        messages.success(request, "Voo atualizado com sucesso.")
-                    else:
-                        messages.error(request, "Status inválido, tente novamente.")
-                        return HttpResponseRedirect('/atualiza_status')
         else:
-            try:
-                chegada_instance = get_object_or_404(Chegada, voo=voo_instance)
+            chegadas = Chegada.objects.filter(data=timezone.localtime(timezone.now()))
+            arrival_available = True
+            for chegada in chegadas :
+                if request.POST['codigo'] == chegada.voo.codigo :
+                    arrival_available = False
+            
+            if arrival_available :
+                if request.POST['statusform'] == "VO":
+                    chegada = {
+                        'voo': voo_instance,
+                        'status': request.POST['statusform'],
+                        'data': timezone.localtime(timezone.now()),
+                    }
+                    record = Chegada(**chegada)
+                    record.save()
+                    messages.success(request, "Voo atualizado com sucesso.")
+                else:
+                    print(1)
+                    messages.error(request, "Status inválido, tente novamente.")
+                    return HttpResponseRedirect('/atualiza_status')
+            else : 
+                chegada_instance = get_object_or_404(Chegada, voo=voo_instance, data=timezone.localtime(timezone.now()))
                 if request.POST['statusform'] == 'AT':
                     chegada_instance.status = request.POST['statusform']
                     chegada_instance.horario_real = timezone.localtime(timezone.now())
                     chegada_instance.save()
                     messages.success(request, "Voo atualizado com sucesso.")
                 else:
+                    print(1)
                     messages.error(request, "Status inválido, tente novamente.")
-            except Exception as error:
-                if "No Chegada matches the given query." in str(error):
-                    if request.POST['statusform'] == "VO":
-                        chegada = {
-                            'voo': voo_instance,
-                            'status': request.POST['statusform'],
-                            'data': timezone.localtime(timezone.now()),
-                        }
-                        record = Chegada(**chegada)
-                        record.save()
-                        messages.success(request, "Voo atualizado com sucesso.")
-                    else:
-                        messages.error(request, "Status inválido, tente novamente.")
-                        return HttpResponseRedirect('/atualiza_status')
     return render(request, 'sys_voos/atualiza_status.html')
 
 def criar_voo(request):    
@@ -231,6 +245,7 @@ def relatorio_chegadas(request):
             data_inicio = form.cleaned_data['data_inicio'].strftime('%Y-%m-%d')
             data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
             status = form.cleaned_data['status']
+            print(data_inicio)
             if status != "Todos":
                 chegadas = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
             else:
@@ -324,6 +339,11 @@ def relatorio_partidas(request):
             return render(request, 'sys_voos/relatorio_partidas.html', context)
     else:
         partidas = Partida.objects.all()
+        pteste = Partida.objects.filter(data=timezone.localtime(timezone.now()))
+        print(pteste)
+        for p in pteste :
+            print(p.voo.codigo)
+        
         contagem = Partida.objects.count()
         list_companhias = []
         cont_status = [0, 0, 0, 0, 0, 0, 0]

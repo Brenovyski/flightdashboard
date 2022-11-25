@@ -42,20 +42,10 @@
                     <td> {{ chegada.horario_real }} </td>
                     <td> {{ chegada.data }} </td>
                     <td>
-                        {% if chegada.status == "EM" %} 
-                          Embarcando
-                        {% elif chegada.status == "CA"%}
-                          Cancelado
-                        {% elif chegada.status == "PR"%}
-                          Programado
-                        {% elif chegada.status == "TA"%}
-                          Taxeando
-                        {% elif chegada.status == "PO"%}
-                          Pronto
-                        {% elif chegada.status == "AU"%}
-                          Autorizado
-                        {% elif chegada.status == "VO"%}
+                        {% if chegada.status == "VO"%}
                           Em voo
+                        {% elif chegada.status == "AT" %}
+                          Aterrisado
                         {% endif %}
                     </td>
                   </tr>
