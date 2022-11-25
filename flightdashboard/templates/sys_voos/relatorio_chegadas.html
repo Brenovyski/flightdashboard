@@ -77,6 +77,10 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Filtragem
             </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-secondary" href="{% url 'relatorio_chegadas' %}">
+              Resetar
+            </a>
           </div>
           <br>
           <div class="card card-primary">
@@ -98,9 +102,54 @@
               {% endif %}           
 
               <p><strong>Número de chegadas:</strong> {{ contagem }}</p> 
-              {% for key, value in dict_companhias.items %}
+              <!-- {% for key, value in dict_companhias.items %}
               <p><strong>Número de chegadas da {{ key }}:</strong> {{ value }}</p> 
-              {% endfor %}
+              {% endfor %} -->
+
+              <div class="row">
+                <div class="col-md-6">
+              <!-- DONUT CHART -->
+              <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Distribuição dos status de voo</h3>
+      
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="chart">
+                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              </div>
+              <div class="col-md-6">
+              <!-- BAR CHART -->
+              <div class="card card-success">
+                <div class="card-header">
+                  <h3 class="card-title">Chegadas por companhia aérea</h3>
+      
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="chart">
+                    <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              </div>
+              </div>
             </div>
 
           
@@ -121,12 +170,7 @@
                           <div class="form-group">
                             <label for="status">Status</label>
                             <select id="status" name="status" class="custom-select rounded-0">      
-                              <option value="EM">Embarcando</option>
-                              <option value="CA">Cancelado</option>
-                              <option value="PR">Programado</option>
-                              <option value="TA">Taxeando</option>
-                              <option value="PO">Pronto</option>
-                              <option value="AU">Autorizado</option>
+                              <option value="Todos">Todos</option>
                               <option value="VO">Em voo</option>
                               <option value="AT">Aterrisado</option>
                             </select>
@@ -143,8 +187,8 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" form="filterform" id="filterform" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <button type="submit" form="filterform" id="filterform" class="btn btn-primary">Filtrar</button>
                 </div>
               </div>
             </div>
@@ -152,6 +196,101 @@
         </div>
         <!-- /.card -->
     </div>
+  </div>
+
+  <script>
+    $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+
+    //--------------
+    //- AREA CHART -
+    //--------------
+
+    // Get context with jQuery - using jQuery's .get() method.
+    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+    var areaChartData = {
+      labels  : ['Azul', 'Gol', 'Latam', 'Lufthansa', 'Emirates'],
+      datasets: [
+        {
+          label               : 'Partidas',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : ["{{ dict_companhias.Azul|default_if_none:0}}", "{{ dict_companhias.Gol|default_if_none:0}}", 
+                                 "{{ dict_companhias.Latam|default_if_none:0}}", "{{ dict_companhias.Lufthansa|default_if_none:0}}", 
+                                 "{{ dict_companhias.Emirates|default_if_none:0}}"]
+        },
+      ]
+    }
+
+    var areaChartOptions = {
+      maintainAspectRatio : false,
+      responsive : true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }],
+        yAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }]
+      }
+    }
+
+    // This will get the first returned node in the jQuery collection.
+    new Chart(areaChartCanvas, {
+      type: 'bar',
+      data: areaChartData,
+      options: areaChartOptions
+    })
+
+    
+  
+  })
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+    var donutData        = {
+      labels: [
+          'Em voo',
+          'Aterrisado',
+      ],
+      datasets: [
+        {
+          data: ["{{ cont_status.0 }}","{{ cont_status.1 }}"],
+          backgroundColor : ['#f56954', '#00a65a'],
+        }
+      ]
+    }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions
+    })
+
+  </script>
 
     
      

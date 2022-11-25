@@ -231,15 +231,22 @@ def relatorio_chegadas(request):
             data_inicio = form.cleaned_data['data_inicio'].strftime('%Y-%m-%d')
             data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
             status = form.cleaned_data['status']
-            chegadas = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
+            if status != "Todos":
+                chegadas = Chegada.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
+            else:
+                chegadas = Chegada.objects.filter(data__range=[data_inicio, data_fim])
             contagem = chegadas.count()
             list_companhias = []
+            cont_status = [0, 0]
             for chegada in chegadas:
                 list_companhias.append(chegada.voo.companhia.nome)
+                if chegada.status == "VO" :
+                    cont_status[0] += 1
+                elif chegada.status == "AT" :
+                    cont_status[1] += 1
             dict_companhias = dict()
             for i in list_companhias:
                 dict_companhias[i] = dict_companhias.get(i, 0) + 1
-            print(dict_companhias)
             context = {
                 'chegadas':chegadas, 
                 'contagem':contagem, 
@@ -248,16 +255,26 @@ def relatorio_chegadas(request):
                 'status': status,
                 'parameters': True,
                 'dict_companhias': dict_companhias,
+                'cont_status': cont_status,
             }
+            messages.success(request, "Relatório filtrado com sucesso")
             return render(request, 'sys_voos/relatorio_chegadas.html', context)
     else:
         chegadas = Chegada.objects.all()
-        contagem = Chegada.objects.count() 
-        return render(request, 'sys_voos/relatorio_chegadas.html', {'chegadas':chegadas, 'contagem':contagem, 'parameters': False})
+        contagem = Chegada.objects.count()
+        list_companhias = []
+        cont_status = [0, 0]
+        for chegada in chegadas:
+            list_companhias.append(chegada.voo.companhia.nome)
+            if chegada.status == "VO" :
+                cont_status[0] += 1
+            elif chegada.status == "AT" :
+                cont_status[1] += 1
+        dict_companhias = dict()
+        for i in list_companhias:
+            dict_companhias[i] = dict_companhias.get(i, 0) + 1
 
-
-def relatorio_movimentacoes(request): 
-    return render(request, 'sys_voos/relatorio_movimentacoes.html')
+        return render(request, 'sys_voos/relatorio_chegadas.html', {'chegadas':chegadas, 'contagem':contagem, 'parameters': False, 'dict_companhias': dict_companhias, 'cont_status':cont_status})
 
 def relatorio_partidas(request):
     if request.method == 'POST':
@@ -266,15 +283,33 @@ def relatorio_partidas(request):
             data_inicio = form.cleaned_data['data_inicio'].strftime('%Y-%m-%d')
             data_fim = form.cleaned_data['data_fim'].strftime('%Y-%m-%d')
             status = form.cleaned_data['status']
-            partidas = Partida.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
+            if status != "Todos" :
+                partidas = Partida.objects.filter(data__range=[data_inicio, data_fim]).filter(status=status)
+            else:
+                partidas = Partida.objects.filter(data__range=[data_inicio, data_fim])
             contagem = partidas.count()
             list_companhias = []
+            cont_status = [0, 0, 0, 0, 0, 0, 0]
             for partida in partidas:
                 list_companhias.append(partida.voo.companhia.nome)
+                if partida.status == "EM" :
+                    cont_status[0] += 1
+                elif partida.status == "CA" :
+                    cont_status[1] += 1
+                elif partida.status == "PR" :
+                    cont_status[2] += 1
+                elif partida.status == "TA" :
+                    cont_status[3] += 1
+                elif partida.status == "PO" :
+                    cont_status[4] += 1
+                elif partida.status == "AU" :
+                    cont_status[5] += 1
+                elif partida.status == "VO" :
+                    cont_status[6] += 1
+                
             dict_companhias = dict()
             for i in list_companhias:
                 dict_companhias[i] = dict_companhias.get(i, 0) + 1
-            print(dict_companhias)
             context = {
                 'partidas':partidas, 
                 'contagem':contagem, 
@@ -283,10 +318,35 @@ def relatorio_partidas(request):
                 'status': status,
                 'parameters': True,
                 'dict_companhias': dict_companhias,
+                'cont_status': cont_status,
             }
+            messages.success(request, "Relatório filtrado com sucesso")
             return render(request, 'sys_voos/relatorio_partidas.html', context)
     else:
         partidas = Partida.objects.all()
-        contagem = Partida.objects.count() 
-        return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem, 'parameters': False})
+        contagem = Partida.objects.count()
+        list_companhias = []
+        cont_status = [0, 0, 0, 0, 0, 0, 0]
+        for partida in partidas:
+            list_companhias.append(partida.voo.companhia.nome)
+            if partida.status == "EM" :
+                cont_status[0] += 1
+            elif partida.status == "CA" :
+                cont_status[1] += 1
+            elif partida.status == "PR" :
+                cont_status[2] += 1
+            elif partida.status == "TA" :
+                cont_status[3] += 1
+            elif partida.status == "PO" :
+                cont_status[4] += 1
+            elif partida.status == "AU" :
+                cont_status[5] += 1
+            elif partida.status == "VO" :
+                cont_status[6] += 1
+
+        dict_companhias = dict()
+        for i in list_companhias:
+            dict_companhias[i] = dict_companhias.get(i, 0) + 1       
+        
+        return render(request, 'sys_voos/relatorio_partidas.html', {'partidas':partidas, 'contagem':contagem, 'parameters': False, 'dict_companhias': dict_companhias, 'cont_status':cont_status})
 
