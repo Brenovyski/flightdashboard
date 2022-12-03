@@ -67,6 +67,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Código de voo</th>
+                    <th>Local de destino</th>
                     <th>Horário Real</th>
                     <th>Data</th>
                     <th>Status</th>
@@ -168,10 +169,9 @@
                 <div class="modal-body">
                   <form method="POST" action="{% url 'relatorio_partidas' %}" id="filterform">
                     {% csrf_token %}
-                    <div class="card-body">
                           <div class="form-group">
                             <label for="status">Status</label>
-                            <select id="status" name="status" class="custom-select rounded-0">   
+                            <select id="status" name="status" class="custom-select rounded-1">   
                               <option value="Todos">Todos</option>  
                               <option value="EM">Embarcando</option>
                               <option value="CA">Cancelado</option>
@@ -191,7 +191,6 @@
                             <label for="data_fim">Data de fim</label>
                             <input name="data_fim" type="date" class="form-control" id="data_fim" required>
                           </div>
-                    </div>
                   </form>
                 </div>
                 <div class="modal-footer">

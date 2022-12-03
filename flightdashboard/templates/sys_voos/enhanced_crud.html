@@ -1,0 +1,204 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block body %}
+{% if user.username == "Administrador" or user.username == "Desenvolvedor" %}
+  <div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            <h1 class="m-0"></h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Voos</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Código de voo</th>
+                      <th>Companhia Aérea</th>
+                      <th>Horário de chegada/partida</th>
+                      <th>Local de destino/origem</th>
+                      <th>Ação</th>
+                    </tr>   
+                    </thead>
+                    <tbody>
+                    {% for voo in voos %}
+                    <tr>
+                      <td> {{ voo.id }} </td>
+                      <td> {{ voo.codigo }} </td>
+                      <td> {{ voo.companhia.nome }} </td>
+                      <td> {{ voo.horario_previsto }} </td>
+                      <td> {{ voo.local }} </td>
+                      <td> 
+                        <div class="d-flex justify-content-center"> 
+                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{ voo.id }}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Editar Voo
+                          </button>
+                          
+                          <div class="modal fade" id="modal-edit{{ voo.id }}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Tela de edição de voo</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="{% url 'editar_voo' %}" id="edit_form{{ voo.id }}">
+                                        {% csrf_token %}
+                                          <div class="form-group">
+                                            <label for="codigo">Código de voo</label>
+                                            <input name="codigo"type="text" class="form-control" id="codigo" value="{{ voo.codigo }}" readonly>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="local">Local</label>
+                                            <input name="local" type="text" class="form-control" id="local" value="{{ voo.local }}" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="horario_previsto">Horário Previsto</label>
+                                            <input name="horario_previsto" type="time" class="form-control" id="horario_previsto" value="{{ voo.horario_previsto|time:'h:i' }}"  required>
+                                          </div>
+                                      </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                  <button type="submit" class="btn btn-warning" form="edit_form{{ voo.id }}" id="edit_form{{ voo.id }}">Editar voo</button>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                          </div>
+                          <!-- /.modal -->
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ voo.id }}">
+                            <i class="fa-solid fa-trash"></i>
+                            Deletar Voo
+                          </button>
+                          
+                          <div class="modal fade" id="modal-delete{{ voo.id }}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Tela de deleção de voo</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="{% url 'deletar_voo' %}" id="del_form{{ voo.id }}">
+                                        {% csrf_token %}
+                                          <div class="form-group">
+                                            <label for="codigo">Código de voo</label>
+                                            <input type="text" name="codigo" class="form-control" id="codigo" value="{{ voo.codigo }}" readonly>
+                                          </div>
+                                    </form>
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <h5><i class="icon fas fa-ban"></i>Atenção!</h5>
+                                        Essa ação removerá o voo permanentemente. 
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                  <button type="submit" class="btn btn-danger" form="del_form{{ voo.id }}" id="del_form{{ voo.id }}">Deletar voo</button>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                          </div>
+                          <!-- /.modal -->
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-create">
+                <i class="fa-solid fa-square-plus"></i>
+                Criar Voo
+              </button>
+              
+              <div class="modal fade" id="modal-create">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Tela de criação de voo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{% url 'criar_voo' %}" id="create_form">
+                            {% csrf_token %}
+                              <div class="form-group">
+                                <label for="codigo">Código de voo</label>
+                                <div class="row">
+                                    <div class=col-2>
+                                        <select id="c_companhia" name="c_companhia" class="custom-select rounded-1" required>   
+                                            {% for companhia in companhias %} 
+                                                <option value="{{ companhia.codigo }}">{{ companhia.codigo }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class=col-10>
+                                        <input maxlength="4" name="codigo" type="text" class="form-control" id="codigo" placeholder="0000" required>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="n_companhia">Companhia Aérea</label>
+                                <select id="n_companhia" name="n_companhia" class="custom-select rounded-1" required>   
+                                    {% for companhia in companhias %} 
+                                        <option value="{{ companhia.nome }}">{{ companhia.nome }}</option>
+                                    {% endfor %}
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="local">Local</label>
+                                <input name="local" type="text" class="form-control" id="local" placeholder="Origem da chegada/Destino da partida" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="horario_previsto">Horário Previsto</label>
+                                <input name="horario_previsto" type="time" class="form-control" id="horario_previsto">
+                              </div>
+                          </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                      <button type="submit" class="btn btn-success" form="create_form" id="create_form">Criar voo</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <br>
+              <br>
+      </div><!-- /.col-md-6 -->
+    </div> <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+{% else %}
+  {% include 'base/error.html' %}
+{% endif %}
+{% endblock body %}

@@ -33,6 +33,11 @@ def lockout(request, credentials):
 def crud(request):
     return render(request, 'sys_voos/crud.html')
 
+def enhanced_crud(request):
+    voos = Voo.objects.all()
+    companhias = CompanhiaAerea.objects.all()
+    return render(request, 'sys_voos/enhanced_crud.html', {'voos': voos, 'companhias':companhias})
+
 def gera_relatorio(request):
     return render(request, 'sys_voos/gera_relatorio.html')
 
@@ -148,25 +153,29 @@ def atualiza_status(request):
                     messages.error(request, "Status inválido, tente novamente.")
     return render(request, 'sys_voos/atualiza_status.html')
 
-def criar_voo(request):    
+def criar_voo(request):   
     if request.method == 'POST':
+        codigo = request.POST['c_companhia']+request.POST['codigo']
         try:
             try:
-                get_object_or_404(Voo, codigo=request.POST['codigo'])   
+                get_object_or_404(Voo, codigo=codigo)   
                 raise MultipleObjectsReturned
             except MultipleObjectsReturned as error:
                 messages.error(request, str(error) + "Codigo já existe. Digite um novo.")
-                return render(request, 'sys_voos/criar_voo.html')
+                return HttpResponseRedirect('/enhanced_crud')
             except Exception as error:
                 if "No Voo matches the given query." in str(error):
                     pass
                 else:
                     messages.error(request, str(error))
-                    return render(request, 'sys_voos/criar_voo.html')
+                    return HttpResponseRedirect('/enhanced_crud')
             horario_stripped = datetime.strptime(request.POST['horario_previsto'], "%H:%M")
-            companhia_instance = get_object_or_404(CompanhiaAerea, nome=request.POST['companhia'])
+            companhia_instance = get_object_or_404(CompanhiaAerea, nome=request.POST['n_companhia'])
+            if companhia_instance.codigo != request.POST['c_companhia'] :
+                messages.error(request, "Código de companhia em código de voo inconsistente.")
+                return HttpResponseRedirect('/enhanced_crud')
             voo = {
-                'codigo': request.POST['codigo'],
+                'codigo': codigo,
                 'companhia': companhia_instance,
                 'local': request.POST['local'],
                 'horario_previsto': horario_stripped,
@@ -179,10 +188,10 @@ def criar_voo(request):
                 messages.error(request, "Essa companhia aérea não existe.")
             else:
                 messages.error(request, error)
-            return render(request, 'sys_voos/criar_voo.html')
-    return render(request, 'sys_voos/criar_voo.html')
+            return HttpResponseRedirect('/enhanced_crud')
+    return HttpResponseRedirect('/enhanced_crud')
 
-def editar_voo(request): 
+def editar_voo(request):  
     if request.method == 'POST':
         try:
             voo_instance = get_object_or_404(Voo, codigo=request.POST['codigo'])
@@ -194,10 +203,11 @@ def editar_voo(request):
             voo_instance.save()
             messages.success(request, "Voo editado com sucesso.")
         except Exception as error:
+            print(str(error))
             if "No Voo matches the given query." in str(error):
                 messages.error(request, "Esse código de voo não existe.")
-            return render(request, 'sys_voos/editar_voo.html')
-    return render(request, 'sys_voos/editar_voo.html')
+            return HttpResponseRedirect('/enhanced_crud')
+    return HttpResponseRedirect('/enhanced_crud')
 
 
 def ler_voo(request): 
@@ -217,7 +227,7 @@ def ler_voo(request):
         return render(request, 'sys_voos/ler_voo.html', context)
 
 
-def deletar_voo(request):
+def deletar_voo(request): 
     if request.method == 'POST':
         form = CodigoForm(request.POST)
         if form.is_valid():
@@ -228,9 +238,9 @@ def deletar_voo(request):
             else:
                 voo.delete()
                 messages.success(request, "Voo deletado com sucesso.")
-            return HttpResponseRedirect('/deletar_voo')
+            return HttpResponseRedirect('/enhanced_crud')
     else:
-        return render(request, 'sys_voos/deletar_voo.html')
+        return HttpResponseRedirect('/enhanced_crud')
 
 
 def relatorio_chegadas(request):

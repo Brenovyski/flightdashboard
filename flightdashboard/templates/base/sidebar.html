@@ -70,8 +70,9 @@
                  {% elif request.resolver_match.view_name == 'editar_voo' %}  class="nav-link active"
                  {% elif request.resolver_match.view_name == 'ler_voo' %}     class="nav-link active"
                  {% elif request.resolver_match.view_name == 'voos' %}     class="nav-link active"
+                 {% elif request.resolver_match.view_name == 'enhanced_crud' %}     class="nav-link active"
                  {% else %} class="nav-link" 
-                 {% endif %} href="{% url 'crud' %}">
+                 {% endif %} href="{% url 'enhanced_crud' %}">
                 &nbsp;<i class="fa-solid fa-database fa-xl"></i>
                 &nbsp;&nbsp;<p>CRUD</p>
               </a>

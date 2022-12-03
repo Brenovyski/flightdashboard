@@ -30,7 +30,7 @@
         <div class="card-body">
           <div class="form-group">
             <label for="exampleSelectBorder">Tipo de voo</label>
-            <select id="vootype" name="vootype" class="custom-select rounded-0" form="form">      
+            <select id="vootype" name="vootype" class="custom-select rounded-1" form="form">      
               <option value="partida">Partida</option>
               <option value="chegada">Chegada</option>
             </select>
@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
             <label for="exampleSelectBorder">Status</label>
-            <select id="statusform" name="statusform" class="custom-select rounded-0" form="form">      
+            <select id="statusform" name="statusform" class="custom-select rounded-1" form="form">      
               <option value="EM">Embarcando</option>
               <option value="CA">Cancelado</option>
               <option value="PR">Programado</option>
@@ -58,12 +58,6 @@
         
         <div class="card-footer">
           <button type="submit" class="btn btn-primary">Atualizar</button>
-          {% if obj %}
-          <p style="color:green">Voo atualizado com sucesso</p>
-          {% endif %} 
-          {% if error %}
-          <p style="color:red">Voo não foi atualizado com sucesso, verifique a formatação dos dados. {{error}}</p>
-          {% endif %} 
         </div>
       </form>
     </div>
