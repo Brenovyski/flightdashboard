@@ -30,9 +30,6 @@ def lockout(request, credentials):
     }
     return render(request, 'registration/login.html', context)
 
-def crud(request):
-    return render(request, 'sys_voos/crud.html')
-
 def enhanced_crud(request):
     voos = Voo.objects.all()
     companhias = CompanhiaAerea.objects.all()
@@ -58,12 +55,6 @@ class painel2(TemplateView):
         context['partidas'] = Partida.objects.all()
         context['chegadas'] = Chegada.objects.all()
         return context
-
-    
-class voos(ListView):
-    template_name = "sys_voos/voos.html"
-    model = Voo
-
 
 def check_status_order_partida(status_now, status_applied):
     status_order = {
@@ -149,7 +140,6 @@ def atualiza_status(request):
                     chegada_instance.save()
                     messages.success(request, "Voo atualizado com sucesso.")
                 else:
-                    print(1)
                     messages.error(request, "Status inválido, tente novamente.")
     return render(request, 'sys_voos/atualiza_status.html')
 
@@ -209,24 +199,6 @@ def editar_voo(request):
             return HttpResponseRedirect('/enhanced_crud')
     return HttpResponseRedirect('/enhanced_crud')
 
-
-def ler_voo(request): 
-    context = {}
-    if request.method == 'POST':
-        try:
-            voo_instance = get_object_or_404(Voo, codigo=request.POST['codigo'])
-            context = {
-                'voo': voo_instance
-            }
-            return render(request, 'sys_voos/ler_voo.html', context)
-        except Exception as error:
-            if "No Voo matches the given query." in str(error):
-                messages.error(request, "Código de voo inválido, voo não existe.")
-            return render(request, 'sys_voos/ler_voo.html', context)
-    else:
-        return render(request, 'sys_voos/ler_voo.html', context)
-
-
 def deletar_voo(request): 
     if request.method == 'POST':
         form = CodigoForm(request.POST)
@@ -241,7 +213,6 @@ def deletar_voo(request):
             return HttpResponseRedirect('/enhanced_crud')
     else:
         return HttpResponseRedirect('/enhanced_crud')
-
 
 def relatorio_chegadas(request):
     if request.method == 'POST':

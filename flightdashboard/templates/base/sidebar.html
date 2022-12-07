@@ -10,23 +10,23 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      {% if user.username == "Administrador" %}
+      {% if user.username == "operador" %}
       <div class="image">
         <img src="{% static 'dist/img/admin.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
-      {% elif user.username == "Funcionario" %}
+      {% elif user.username == "funcionario" %}
       <div class="image">
         <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
-      {% elif user.username == "Torre" %}
+      {% elif user.username == "torre" %}
       <div class="image">
         <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
-      {% elif user.username == "Piloto" %}
+      {% elif user.username == "piloto" %}
       <div class="image">
         <img src="{% static 'dist/img/func.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
-      {% elif user.username == "Gerente" %}
+      {% elif user.username == "gerente" %}
       <div class="image">
         <img src="{% static 'dist/img/geren.png'%}" class="img-circle elevation-2" alt="User Image">
       </div>
@@ -36,7 +36,16 @@
       </div>
       {% endif %}
       <div class="info">
-        <a style="pointer-events: none" href="#" class="d-block">{{ user.username }}</a>
+        <a style="pointer-events: none" href="#" class="d-block">
+          {% if user.username == "operador" %}       Operador
+          {% elif user.username == "funcionario" %}  Funcionario
+          {% elif user.username == "torre" %}        Torre
+          {% elif user.username == "piloto" %}       Piloto
+          {% elif user.username == "gerente" %}      Gerente
+          {% else %} {{ user.username }}
+          {% endif %}
+        
+      </a>
       </div>
     </div>
 
@@ -60,9 +69,7 @@
             <i class="fa-solid fa-table fa-xl"></i>
             &nbsp;&nbsp;<p>Painel</p>
           </a>
-        </li>
-        {% if user.username != "Painel" %}
-        
+        </li> 
             <li class="nav-item">
               <a {% if request.resolver_match.view_name == 'crud' %}          class="nav-link active" 
                  {% elif request.resolver_match.view_name == 'criar_voo' %}   class="nav-link active"
@@ -93,8 +100,6 @@
                 &nbsp;&nbsp;&nbsp;<p>Gerar Relatório</p>
               </a>
             </li>
-        {% endif %}
-
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

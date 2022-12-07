@@ -81,11 +81,11 @@ Johan Su Kwok - NUSP: 10770176
 
     | Username      | Email address              | Password    |
     |---------------|----------------------------|-------------|
-    | Administrador | admin@flightdashboard.com  | admin       |
-    | Funcionario   | func@flightdashboard.com   | func        |
-    | Torre         | torre@flightdashboard.com  | torre       |
-    | Piloto        | piloto@flightdashboard.com | piloto      |
-    | Gerente       | geren@flightdashboard.com  | geren       |
+    | operador      | oper@flightdashboard.com   | 1234        |
+    | funcionario   | func@flightdashboard.com   | 1234        |
+    | torre         | torre@flightdashboard.com  | 1234        |
+    | piloto        | piloto@flightdashboard.com | 1234        |
+    | gerente       | geren@flightdashboard.com  | 1234        |
 
    Para fins de desenvolvimento, pode-se também criar um login no molde abaixo:
 
@@ -135,6 +135,3 @@ Johan Su Kwok - NUSP: 10770176
 
    Para mais informações, segue a documentação: 
    <https://django-axes.readthedocs.io/en/latest/3_usage.html#resetting-attempts-and-lockouts>
-
-
-

@@ -1,24 +1,24 @@
 {% load static %}
 
-<!-- OBS: Vão existir três login responsáveis pelas três funções (CRUD, ATUALIZAR, RELATORIO) do sistema
-     - O login de administrador do sistema, responsável pelo CRUD
+<!-- OBS: Vão existir três (+2) login responsáveis pelas três funções (CRUD, ATUALIZAR, RELATORIO) do sistema
+     - O login de aoperador do sistema, responsável pelo CRUD
      - O login dos funcionários da companhia aéres responsável por atualizar os status de voos
      - O login de gerente de operações do sistema, responsável pela geração de relatórios -->
 <!-- Esse padrão pode ser alterado conforme mudanças tenham sido feitas -->
      
 <!-- Os logins deverão ser cadastrados previamente com o seguinte padrão:
      Administrador do sistema
-        - Username: Administrador
-        - Email address: admin@flightdashboard.com
-        - Password: admin
+        - Username: operador
+        - Email address: oper@flightdashboard.com
+        - Password: 1234
      Funcionários da companhia aérea
-        - Username: Funcionario
-        - Email address: func@flightdashboard.com
-        - Password: func
+        - Username: funcionario/torre/piloto
+        - Email address: func/torre/piloto@flightdashboard.com
+        - Password: 1234
      Gerente de operações do sistema
-        - Username: Gerente
+        - Username: gerente
         - Email address: geren@flightdashboard.com
-        - Password: geren 
+        - Password: 1234 
     -->
 
 <!DOCTYPE html>
@@ -83,7 +83,7 @@
         </div>
         <div class="row">
           <div class="col-8">
-            <a href="{% url 'painel2' %}" class="btn btn-success">Acessar Painel</a>
+            <a href="{% url 'painel2' %}" class="btn btn-success">Access Pannel</a>
           </div>
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
