@@ -135,3 +135,5 @@ Johan Su Kwok - NUSP: 10770176
 
    Para mais informações, segue a documentação: 
    <https://django-axes.readthedocs.io/en/latest/3_usage.html#resetting-attempts-and-lockouts>
+
+3. Para acessar o site, foi usado o PythonAnywhere para hospedar o sistema de voo, acessado no seguinte link: https://flightdashboard.pythonanywhere.com
